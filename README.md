@@ -14,7 +14,12 @@ Tenangin App is a modern, beautifully designed mobile application built with Flu
 ## 📱 Screenshots
 
 <p align="center">
-  <img src="assets/images/Onboarding.png" width="300" alt="Tenangin App Onboarding Screen">
+  <img src="assets/images/Onboarding.png" width="200" alt="Onboarding">
+  <img src="assets/screenshots/screenshot1.png" width="200" alt="Sign In">
+  <img src="assets/screenshots/screenshot2.png" width="200" alt="Home">
+  <img src="assets/screenshots/screenshot3.png" width="200" alt="Learn">
+  <img src="assets/screenshots/screenshot4.png" width="200" alt="Detail">
+  <img src="assets/screenshots/screenshot5.png" width="200" alt="Video">
 </p>
 
 ## 🚀 Getting Started
