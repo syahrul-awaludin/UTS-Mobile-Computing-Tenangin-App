@@ -13,7 +13,9 @@ Tenangin App is a modern, beautifully designed mobile application built with Flu
 
 ## 📱 Screenshots
 
-*(Add screenshots of your application here)*
+<p align="center">
+  <img src="assets/images/Onboarding.png" width="300" alt="Tenangin App Onboarding Screen">
+</p>
 
 ## 🚀 Getting Started
 
@@ -26,7 +28,7 @@ To run this project locally, ensure you have Flutter installed.
 
 2. **Navigate to the project directory**
    ```bash
-   cd UTS-Mobile-Computing-Tenangin-App/tenangin_app
+   cd UTS-Mobile-Computing-Tenangin-App
    ```
 
 3. **Install dependencies**
