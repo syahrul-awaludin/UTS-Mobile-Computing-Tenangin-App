@@ -9,7 +9,7 @@ class LearnService {
         mood: 'Anxious',
         imagePath: 'assets/images/taking_out_stress.png',
         isLocked: false,
-        youtubeVideoId: 'pU80BEm43JM',
+        youtubeVideoId: 'Nz9eAaXRzGg',
       ),
       CourseModel(
         title: 'Taking Breath',
@@ -17,7 +17,7 @@ class LearnService {
         mood: 'Anxious',
         imagePath: 'assets/images/taking_breath.png',
         isLocked: true,
-        youtubeVideoId: 'j734gLbQFbU',
+        youtubeVideoId: 'LiUnFJ8P4gM',
       ),
       CourseModel(
         title: 'Mindfullness',
@@ -25,7 +25,7 @@ class LearnService {
         mood: 'Anxious',
         imagePath: 'assets/images/mindfullnes.png',
         isLocked: true,
-        youtubeVideoId: 'ZToicYcHIOU',
+        youtubeVideoId: 'laQIz0hLeII',
       ),
     ];
   }
@@ -38,7 +38,7 @@ class LearnService {
         mood: 'Anxious',
         imagePath: 'assets/images/taking_breath.png',
         isLocked: true,
-        youtubeVideoId: 'j734gLbQFbU',
+        youtubeVideoId: 'LiUnFJ8P4gM',
       ),
       CourseModel(
         title: 'Mindfullness',
@@ -46,7 +46,7 @@ class LearnService {
         mood: 'Anxious',
         imagePath: 'assets/images/mindfullnes.png',
         isLocked: false,
-        youtubeVideoId: 'ZToicYcHIOU',
+        youtubeVideoId: 'laQIz0hLeII',
       ),
     ];
   }

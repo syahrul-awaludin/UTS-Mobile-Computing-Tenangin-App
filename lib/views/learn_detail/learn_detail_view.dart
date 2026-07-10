@@ -21,6 +21,7 @@ class LearnDetailView extends StatelessWidget {
       mood: 'Anxious',
       imagePath: 'assets/images/taking_out_stress.png',
       isLocked: false,
+      youtubeVideoId: 'Nz9eAaXRzGg',
     ),
     CourseModel(
       title: 'Taking Breath',
@@ -28,6 +29,7 @@ class LearnDetailView extends StatelessWidget {
       mood: 'Anxious',
       imagePath: 'assets/images/taking_breath.png',
       isLocked: true,
+      youtubeVideoId: 'LiUnFJ8P4gM',
     ),
     CourseModel(
       title: 'Emotional Reacting',
@@ -35,6 +37,7 @@ class LearnDetailView extends StatelessWidget {
       mood: 'Anxious',
       imagePath: 'assets/images/emotional_reacting.png',
       isLocked: true,
+      youtubeVideoId: 'laQIz0hLeII',
     ),
   ];
 
