@@ -24,7 +24,7 @@ class NotificationService {
       macOS: initializationSettingsDarwin,
     );
 
-    await _notificationsPlugin.initialize(initializationSettings);
+    await _notificationsPlugin.initialize(settings: initializationSettings);
   }
 
   Future<void> showNotification({required int id, required String title, required String body}) async {
@@ -45,10 +45,10 @@ class NotificationService {
     );
 
     await _notificationsPlugin.show(
-      id,
-      title,
-      body,
-      platformChannelSpecifics,
+      id: id,
+      title: title,
+      body: body,
+      notificationDetails: platformChannelSpecifics,
     );
   }
 

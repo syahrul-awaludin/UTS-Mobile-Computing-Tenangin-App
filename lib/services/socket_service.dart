@@ -1,10 +1,10 @@
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'notification_service.dart';
 
 class SocketService with ChangeNotifier {
-  IO.Socket? _socket;
+  io.Socket? _socket;
 
   // Sambungkan ke server WebSocket
   Future<void> connectAndListen() async {
@@ -15,7 +15,7 @@ class SocketService with ChangeNotifier {
 
     if (token == null) return;
 
-    _socket = IO.io('http://103.93.135.88:3000', <String, dynamic>{
+    _socket = io.io('http://103.93.135.88:3000', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
       'auth': {'token': token}

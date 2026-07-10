@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+import 'package:tenangin_app/services/socket_service.dart';
 import '../services/auth_service.dart';
 import '../views/main_tab/main_tab_view.dart';
 import 'profile_controller.dart';
@@ -27,7 +28,8 @@ class AuthController extends ChangeNotifier {
 
   final TextEditingController registerNameController = TextEditingController();
   final TextEditingController registerEmailController = TextEditingController();
-  final TextEditingController registerPasswordController = TextEditingController();
+  final TextEditingController registerPasswordController =
+      TextEditingController();
 
   void togglePasswordVisibility() {
     _obscurePassword = !_obscurePassword;
@@ -57,7 +59,7 @@ class AuthController extends ChangeNotifier {
       final data = await _authService.login(email, password);
       final token = data['accessToken'] ?? data['token'];
       final refreshToken = data['refreshToken'];
-      
+
       final prefs = await SharedPreferences.getInstance();
       if (token != null) {
         await prefs.setString('auth_token', token);
@@ -74,7 +76,7 @@ class AuthController extends ChangeNotifier {
         context.read<ProfileController>().fetchProfile();
         context.read<CommunityController>().fetchPosts();
         context.read<NotificationController>().loadNotifications();
-        
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => const MainTabView()),
@@ -84,7 +86,9 @@ class AuthController extends ChangeNotifier {
       if (context.mounted) {
         // Strip the "Exception: " prefix if it exists to make it look cleaner
         final errorMessage = e.toString().replaceFirst('Exception: ', '');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMessage)));
       }
     } finally {
       _isLoading = false;
@@ -111,14 +115,18 @@ class AuthController extends ChangeNotifier {
       await _authService.register(name, email, password);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Registration successful! Please login.')),
+          const SnackBar(
+            content: Text('Registration successful! Please login.'),
+          ),
         );
         Navigator.pop(context);
       }
     } catch (e) {
       if (context.mounted) {
         final errorMessage = e.toString().replaceFirst('Exception: ', '');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMessage)));
       }
     } finally {
       _isLoading = false;
@@ -128,7 +136,7 @@ class AuthController extends ChangeNotifier {
 
   Future<void> logout(BuildContext context, VoidCallback onLogout) async {
     final prefs = await SharedPreferences.getInstance();
-    
+
     // Disconnect socket
     if (context.mounted) {
       context.read<SocketService>().disconnect();
