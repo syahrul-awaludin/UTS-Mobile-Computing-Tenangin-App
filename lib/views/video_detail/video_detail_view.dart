@@ -24,6 +24,9 @@ class _VideoDetailViewState extends State<VideoDetailView> {
   final yt = YoutubeExplode();
   bool _isLoading = true;
   String? _errorMessage;
+  String? _videoTitle;
+  String? _videoDescription;
+  String? _videoAuthor;
 
   @override
   void initState() {
@@ -33,6 +36,7 @@ class _VideoDetailViewState extends State<VideoDetailView> {
 
   Future<void> _initPlayer() async {
     try {
+      final video = await yt.videos.get(widget.videoId);
       final manifest = await yt.videos.streamsClient.getManifest(widget.videoId);
       final streamInfo = manifest.muxed.withHighestBitrate();
 
@@ -47,6 +51,9 @@ class _VideoDetailViewState extends State<VideoDetailView> {
       );
 
       setState(() {
+        _videoTitle = video.title;
+        _videoDescription = video.description;
+        _videoAuthor = video.author;
         _isLoading = false;
       });
     } catch (e) {
@@ -117,7 +124,7 @@ class _VideoDetailViewState extends State<VideoDetailView> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.title,
+                        _videoTitle ?? widget.title,
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -126,9 +133,13 @@ class _VideoDetailViewState extends State<VideoDetailView> {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      const Text(
-                        'Bring a sense of spaciousness into your day\nwith a quick breathing exercise.',
-                        style: TextStyle(
+                      Text(
+                        _videoDescription != null && _videoDescription!.isNotEmpty
+                            ? (_videoDescription!.length > 150
+                                ? '${_videoDescription!.substring(0, 150)}...'
+                                : _videoDescription!)
+                            : 'Bring a sense of spaciousness into your day\nwith a quick breathing exercise.',
+                        style: const TextStyle(
                           fontSize: 14,
                           color: AppColors.textCaption,
                           height: 1.4,
@@ -172,12 +183,15 @@ class _VideoDetailViewState extends State<VideoDetailView> {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Text(
-                    'Michelle Jane',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.textHeading,
+                  Expanded(
+                    child: Text(
+                      _videoAuthor ?? 'Michelle Jane',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.textHeading,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],
