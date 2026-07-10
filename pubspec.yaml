@@ -43,6 +43,7 @@ dependencies:
   socket_io_client: ^3.1.6
   flutter_local_notifications: ^22.0.1
   overlay_support: ^2.1.0
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

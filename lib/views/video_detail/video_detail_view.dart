@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../theme/app_colors.dart';
 
 class VideoDetailView extends StatefulWidget {
@@ -65,11 +66,33 @@ class _VideoDetailViewState extends State<VideoDetailView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: YoutubePlayer(
-                controller: _controller,
-                aspectRatio: 16 / 9,
+            Container(
+              height: 200,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: AppColors.primaryDeep.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.ondemand_video, size: 48, color: AppColors.primary),
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      final url = Uri.parse('https://www.youtube.com/watch?v=${widget.videoId}');
+                      if (!await launchUrl(url)) {
+                        debugPrint('Could not launch $url');
+                      }
+                    },
+                    icon: const Icon(Icons.open_in_browser),
+                    label: const Text('Buka di YouTube'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 24),
