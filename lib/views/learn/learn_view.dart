@@ -69,7 +69,7 @@ class _LearnViewState extends State<LearnView> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LearnDetailView()),
+                            builder: (context) => LearnDetailView(course: course)),
                       ),
                     ),
                   );

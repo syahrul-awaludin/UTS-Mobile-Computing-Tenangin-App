@@ -7,15 +7,11 @@ import '../../models/course_model.dart';
 import '../video_detail/video_detail_view.dart';
 
 class LearnDetailView extends StatelessWidget {
-  final String title;
-  final String mood;
-  final String duration;
+  final CourseModel course;
 
   const LearnDetailView({
     super.key,
-    this.title = 'Trauma Childhood',
-    this.mood = 'Anxious',
-    this.duration = '6 min',
+    required this.course,
   });
 
   static const List<CourseModel> _courses = [
@@ -114,7 +110,7 @@ class LearnDetailView extends StatelessWidget {
                     top: 40, left: 16, right: 16, bottom: 24),
                 children: [
                   Text(
-                    title,
+                    course.title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 20,
@@ -127,7 +123,7 @@ class LearnDetailView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TagChip(
-                          icon: Icons.access_time, label: duration),
+                          icon: Icons.access_time, label: course.duration),
                       const SizedBox(width: 12),
                       const TagChip(
                           icon: Icons.play_circle_outline, label: 'meditation'),
@@ -143,7 +139,11 @@ class LearnDetailView extends StatelessWidget {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const VideoDetailView()),
+                            builder: (context) => VideoDetailView(
+                              title: course.title,
+                              videoId: course.youtubeVideoId,
+                            ),
+                        ),
                       ),
                     ),
                   ),
@@ -164,7 +164,11 @@ class LearnDetailView extends StatelessWidget {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const VideoDetailView()),
+                            builder: (context) => VideoDetailView(
+                              title: _courses[i].title,
+                              videoId: _courses[i].youtubeVideoId,
+                            ),
+                        ),
                       ),
                     ),
                   )),

@@ -30,7 +30,7 @@ class TodayMeditationList extends StatelessWidget {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const LearnDetailView()),
+                      builder: (context) => LearnDetailView(course: todayMeditations[index])),
                 ),
               );
             },

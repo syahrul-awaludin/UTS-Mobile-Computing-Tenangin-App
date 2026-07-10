@@ -4,6 +4,7 @@ class CourseModel {
   final String mood;
   final String imagePath;
   final bool isLocked;
+  final String youtubeVideoId;
 
   const CourseModel({
     required this.title,
@@ -11,5 +12,6 @@ class CourseModel {
     required this.mood,
     required this.imagePath,
     this.isLocked = false,
+    this.youtubeVideoId = 'dQw4w9WgXcQ',
   });
 }
