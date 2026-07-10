@@ -3,6 +3,7 @@ import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:overlay_support/overlay_support.dart';
+import '../theme/app_colors.dart';
 
 class SocketService with ChangeNotifier {
   io.Socket? _socket;
@@ -43,7 +44,7 @@ class SocketService with ChangeNotifier {
         showSimpleNotification(
           Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
           subtitle: Text(body),
-          background: const Color(0xFF3B82F6), // AppColors.primary
+          background: AppColors.primary,
           duration: const Duration(seconds: 4),
           slideDismissDirection: DismissDirection.up,
         );
