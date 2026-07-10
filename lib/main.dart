@@ -56,9 +56,13 @@ class TenanginApp extends StatelessWidget {
           create: (context) => LearnController(context.read<LearnService>()),
           update: (context, learnService, previous) => previous ?? LearnController(learnService),
         ),
-        ChangeNotifierProxyProvider<CommunityService, CommunityController>(
-          create: (context) => CommunityController(context.read<CommunityService>()),
-          update: (context, communityService, previous) => previous ?? CommunityController(communityService),
+        ChangeNotifierProxyProvider2<CommunityService, SocketService, CommunityController>(
+          create: (context) => CommunityController(
+            context.read<CommunityService>(), 
+            context.read<SocketService>(),
+          ),
+          update: (context, communityService, socketService, previous) => 
+            previous ?? CommunityController(communityService, socketService),
         ),
         ChangeNotifierProxyProvider<ProfileService, ProfileController>(
           create: (context) => ProfileController(context.read<ProfileService>()),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -5,6 +6,10 @@ import 'package:overlay_support/overlay_support.dart';
 
 class SocketService with ChangeNotifier {
   io.Socket? _socket;
+  
+  // Stream untuk meng-handle update dari socket secara global
+  final _postUpdateController = StreamController<Map<String, dynamic>>.broadcast();
+  Stream<Map<String, dynamic>> get onPostUpdated => _postUpdateController.stream;
 
   // Sambungkan ke server WebSocket
   Future<void> connectAndListen() async {
@@ -45,6 +50,14 @@ class SocketService with ChangeNotifier {
       }
     });
 
+    // Mendengarkan update status postingan (jumlah like/comment)
+    _socket!.on('post_updated', (data) {
+      debugPrint('Menerima Update Postingan: $data');
+      if (data != null) {
+        _postUpdateController.add(Map<String, dynamic>.from(data));
+      }
+    });
+
     _socket!.onDisconnect((_) => debugPrint('Disconnected from WebSocket'));
   }
 
@@ -56,6 +69,7 @@ class SocketService with ChangeNotifier {
 
   @override
   void dispose() {
+    _postUpdateController.close();
     disconnect();
     super.dispose();
   }

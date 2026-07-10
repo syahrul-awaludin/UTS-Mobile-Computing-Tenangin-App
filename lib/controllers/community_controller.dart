@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/post_model.dart';
 import '../services/community_service.dart';
+import '../services/socket_service.dart';
 
 class CommunityController extends ChangeNotifier {
   List<PostModel> _posts = [];
@@ -58,9 +60,37 @@ class CommunityController extends ChangeNotifier {
   }
 
   final CommunityService _communityService;
+  final SocketService _socketService;
+  late final StreamSubscription<Map<String, dynamic>> _postUpdateSubscription;
 
-  CommunityController(this._communityService) {
+  CommunityController(this._communityService, this._socketService) {
     fetchPosts();
+    _postUpdateSubscription = _socketService.onPostUpdated.listen(_handlePostUpdate);
+  }
+
+  void _handlePostUpdate(Map<String, dynamic> data) {
+    final postId = data['postId'] as String?;
+    if (postId == null) return;
+
+    final index = _posts.indexWhere((p) => p.id == postId);
+    if (index != -1) {
+      int newLikeCount = _posts[index].likeCount;
+      int newCommentCount = _posts[index].commentCount;
+
+      if (data.containsKey('totalLikes')) {
+        newLikeCount = data['totalLikes'] as int;
+      }
+      if (data.containsKey('totalComments')) {
+        newCommentCount = data['totalComments'] as int;
+      }
+
+      _posts[index] = _posts[index].copyWith(
+        likeCount: newLikeCount,
+        commentCount: newCommentCount,
+      );
+      
+      notifyListeners();
+    }
   }
 
   Future<void> fetchPosts() async {
@@ -356,6 +386,7 @@ class CommunityController extends ChangeNotifier {
 
   @override
   void dispose() {
+    _postUpdateSubscription.cancel();
     searchController.dispose();
     postSubjectController.dispose();
     postContentController.dispose();
