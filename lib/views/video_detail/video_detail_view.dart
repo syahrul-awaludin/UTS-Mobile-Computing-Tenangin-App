@@ -67,9 +67,29 @@ class _VideoDetailViewState extends State<VideoDetailView> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(24),
-              child: YoutubePlayer(
-                controller: _controller,
-                aspectRatio: 16 / 9,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  YoutubePlayer(
+                    controller: _controller,
+                    aspectRatio: 16 / 9,
+                  ),
+                  Positioned.fill(
+                    child: GestureDetector(
+                      onTap: () async {
+                        final state = await _controller.playerState;
+                        if (state == PlayerState.playing) {
+                          _controller.pauseVideo();
+                        } else {
+                          _controller.playVideo();
+                        }
+                      },
+                      child: Container(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 24),
