@@ -32,8 +32,8 @@ class GreetingBanner extends StatelessWidget {
         children: [
           // Decorative squiggles
           Positioned(
-            top: 20,
-            right: 120,
+            top: 15,
+            left: 15,
             child: SizedBox(
               width: 30,
               height: 20,
@@ -44,7 +44,7 @@ class GreetingBanner extends StatelessWidget {
           ),
           Positioned(
             bottom: 20,
-            right: 180,
+            left: 60,
             child: SizedBox(
               width: 30,
               height: 30,
@@ -55,7 +55,7 @@ class GreetingBanner extends StatelessWidget {
           ),
           // Character illustration
           Positioned(
-            right: 16,
+            right: 0,
             bottom: 0,
             child: Image.asset(
               'assets/images/Home_Illustration.png',
@@ -64,44 +64,49 @@ class GreetingBanner extends StatelessWidget {
             ),
           ),
           // Content
+          // Content
           Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '${_getGreeting()}, $userName',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                ElevatedButton(
-                  onPressed: onAddMood,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6C3BEC),
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                  ),
-                  child: const Text(
-                    'Add Mood',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
+            padding: const EdgeInsets.only(left: 0.0, top: 20.0, bottom: 20.0, right: 20.0),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${_getGreeting()}, $userName',
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(
                       color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 12),
+                  ElevatedButton(
+                    onPressed: onAddMood,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF6C3BEC),
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                    ),
+                    child: const Text(
+                      'Add Mood',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
