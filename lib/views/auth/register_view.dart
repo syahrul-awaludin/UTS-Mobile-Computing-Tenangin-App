@@ -5,6 +5,7 @@ import '../../theme/app_colors.dart';
 import '../../widgets/auth/auth_input_field.dart';
 import '../../widgets/common/app_primary_button.dart';
 import '../../widgets/common/social_login_button.dart';
+import 'login_view.dart';
 
 
 class RegisterView extends StatelessWidget {
@@ -165,7 +166,12 @@ class RegisterView extends StatelessWidget {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.pop(context);
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => const LoginView(),
+                                      ),
+                                    );
                                   },
                                   child: const Text(
                                     'Sign In',
