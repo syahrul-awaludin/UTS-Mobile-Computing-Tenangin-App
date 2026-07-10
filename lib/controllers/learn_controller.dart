@@ -5,18 +5,17 @@ import '../services/learn_service.dart';
 class LearnController extends ChangeNotifier {
   final LearnService _learnService;
 
-  LearnController(this._learnService) {
-    _allCourses = _learnService.fetchAllCourses();
-    todayMeditations = _learnService.fetchTodayMeditations();
-  }
+  LearnController(this._learnService);
 
   String _searchQuery = '';
   final TextEditingController searchController = TextEditingController();
 
   String get searchQuery => _searchQuery;
 
-  late List<CourseModel> _allCourses;
-  late List<CourseModel> todayMeditations;
+  List<CourseModel> get _allCourses => _learnService.fetchAllCourses();
+  
+  List<CourseModel> get todayMeditations => _learnService.fetchTodayMeditations();
+
   List<CourseModel> get filteredCourses {
     if (_searchQuery.isEmpty) return _allCourses;
     return _allCourses
