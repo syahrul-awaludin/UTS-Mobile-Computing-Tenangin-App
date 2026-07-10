@@ -1,7 +1,7 @@
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'notification_service.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class SocketService with ChangeNotifier {
   io.Socket? _socket;
@@ -15,7 +15,7 @@ class SocketService with ChangeNotifier {
 
     if (token == null) return;
 
-    _socket = io.io('http://103.93.135.88:3000', <String, dynamic>{
+    _socket = io.io('https://tenangin.syahrulawaludin.my.id', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
       'auth': {'token': token}
@@ -34,11 +34,13 @@ class SocketService with ChangeNotifier {
         String title = data['title'] ?? 'Notifikasi Baru';
         String body = data['body'] ?? '';
         
-        // Memunculkan local notification
-        NotificationService().showNotification(
-          id: data['id']?.hashCode ?? 0, 
-          title: title, 
-          body: body
+        // Memunculkan In-App Notification Overlay di bagian atas (menggunakan overlay_support)
+        showSimpleNotification(
+          Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+          subtitle: Text(body),
+          background: const Color(0xFF3B82F6), // AppColors.primary
+          duration: const Duration(seconds: 4),
+          slideDismissDirection: DismissDirection.up,
         );
       }
     });

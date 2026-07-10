@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'theme/app_theme.dart';
 import 'views/splash/splash_view.dart';
 
@@ -68,11 +69,13 @@ class TenanginApp extends StatelessWidget {
           update: (context, notificationService, previous) => previous ?? NotificationController(notificationService),
         ),
       ],
-      child: MaterialApp(
-        title: 'Tenangin',
-        theme: AppTheme.lightTheme,
-        home: const SplashView(),
-        debugShowCheckedModeBanner: false,
+      child: OverlaySupport.global(
+        child: MaterialApp(
+          title: 'Tenangin',
+          theme: AppTheme.lightTheme,
+          home: const SplashView(),
+          debugShowCheckedModeBanner: false,
+        ),
       ),
     );
   }
