@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import '../services/auth_service.dart';
 import '../views/main_tab/main_tab_view.dart';
+import 'profile_controller.dart';
+import 'community_controller.dart';
+import 'notification_controller.dart';
 
 class AuthController extends ChangeNotifier {
   final AuthService _authService;
@@ -66,6 +70,11 @@ class AuthController extends ChangeNotifier {
       await fetchUserProfile();
 
       if (context.mounted) {
+        // Provide fresh data for the newly logged in user
+        context.read<ProfileController>().fetchProfile();
+        context.read<CommunityController>().fetchPosts();
+        context.read<NotificationController>().loadNotifications();
+        
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => const MainTabView()),
