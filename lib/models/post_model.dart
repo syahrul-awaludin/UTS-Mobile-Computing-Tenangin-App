@@ -33,6 +33,40 @@ class PostModel {
     this.isLikedByMe = false,
   });
 
+  PostModel copyWith({
+    String? id,
+    String? authorId,
+    String? userName,
+    String? subject,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? content,
+    String? imageAsset,
+    Color? avatarColor,
+    IconData? avatarIcon,
+    int? likeCount,
+    int? commentCount,
+    int? bookmarkCount,
+    bool? isLikedByMe,
+  }) {
+    return PostModel(
+      id: id ?? this.id,
+      authorId: authorId ?? this.authorId,
+      userName: userName ?? this.userName,
+      subject: subject ?? this.subject,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      content: content ?? this.content,
+      imageAsset: imageAsset ?? this.imageAsset,
+      avatarColor: avatarColor ?? this.avatarColor,
+      avatarIcon: avatarIcon ?? this.avatarIcon,
+      likeCount: likeCount ?? this.likeCount,
+      commentCount: commentCount ?? this.commentCount,
+      bookmarkCount: bookmarkCount ?? this.bookmarkCount,
+      isLikedByMe: isLikedByMe ?? this.isLikedByMe,
+    );
+  }
+
   factory PostModel.fromJson(Map<String, dynamic> json) {
     // Extract author details
     final author = json['author'] ?? {};
