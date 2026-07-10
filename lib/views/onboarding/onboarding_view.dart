@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/common/app_primary_button.dart';
 import '../auth/login_view.dart';
+import '../auth/register_view.dart';
 
 class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});
@@ -56,7 +57,7 @@ class OnboardingView extends StatelessWidget {
                     onPressed: () => Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const LoginView()),
+                          builder: (context) => const RegisterView()),
                     ),
                   ),
                   const SizedBox(height: 24),
