@@ -33,7 +33,7 @@ class GreetingBanner extends StatelessWidget {
           // Decorative squiggles
           Positioned(
             top: 15,
-            left: 15,
+            right: 15,
             child: SizedBox(
               width: 30,
               height: 20,
@@ -66,16 +66,16 @@ class GreetingBanner extends StatelessWidget {
           // Content
           // Content
           Padding(
-            padding: const EdgeInsets.only(left: 0.0, top: 20.0, bottom: 20.0, right: 20.0),
+            padding: const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0, right: 120.0),
             child: SizedBox(
               width: double.infinity,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     '${_getGreeting()}, $userName',
-                    textAlign: TextAlign.right,
+                    textAlign: TextAlign.left,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
