@@ -24,7 +24,7 @@ class _VideoDetailViewState extends State<VideoDetailView> {
     super.initState();
     _controller = YoutubePlayerController.fromVideoId(
       videoId: widget.videoId,
-      autoPlay: true,
+      autoPlay: false,
       params: const YoutubePlayerParams(
         showControls: true,
         showFullscreenButton: true,
@@ -67,29 +67,9 @@ class _VideoDetailViewState extends State<VideoDetailView> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(24),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  YoutubePlayer(
-                    controller: _controller,
-                    aspectRatio: 16 / 9,
-                  ),
-                  Positioned.fill(
-                    child: GestureDetector(
-                      onTap: () async {
-                        final state = await _controller.playerState;
-                        if (state == PlayerState.playing) {
-                          _controller.pauseVideo();
-                        } else {
-                          _controller.playVideo();
-                        }
-                      },
-                      child: Container(
-                        color: Colors.transparent,
-                      ),
-                    ),
-                  ),
-                ],
+              child: YoutubePlayer(
+                controller: _controller,
+                aspectRatio: 16 / 9,
               ),
             ),
             const SizedBox(height: 24),
