@@ -43,11 +43,6 @@ class AppSearchBar extends StatelessWidget {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {},
-            child: const Icon(Icons.tune,
-                color: AppColors.textCaption, size: 24),
-          ),
         ],
       ),
     );
