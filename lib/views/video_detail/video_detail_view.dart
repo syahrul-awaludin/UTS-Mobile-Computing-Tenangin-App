@@ -30,6 +30,7 @@ class _VideoDetailViewState extends State<VideoDetailView> {
         showFullscreenButton: true,
         mute: false,
         privacyEnhancedMode: false,
+        pointerEvents: PointerEvents.auto,
       ),
     );
   }
