@@ -208,7 +208,7 @@ class SettingsView extends StatelessWidget {
                     title: 'Log Out',
                     isDestructive: true,
                     onTap: () {
-                      context.read<AuthController>().logout(() {
+                      context.read<AuthController>().logout(context, () {
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (context) => const SplashView()),

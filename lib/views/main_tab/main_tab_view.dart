@@ -6,6 +6,9 @@ import '../learn/learn_view.dart';
 import '../community/community_view.dart';
 import '../profile/profile_view.dart';
 
+import 'package:provider/provider.dart';
+import '../../services/socket_service.dart';
+
 class MainTabView extends StatefulWidget {
   const MainTabView({super.key});
 
@@ -23,6 +26,14 @@ class _MainTabViewState extends State<MainTabView> {
     const _PlaceholderView(title: 'Consult'),
     const ProfileView(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<SocketService>().connectAndListen();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

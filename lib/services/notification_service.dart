@@ -1,8 +1,57 @@
 import 'dart:convert';
 import 'api_client.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../models/notification_model.dart';
 
 class NotificationService {
+  static final FlutterLocalNotificationsPlugin _notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  static Future<void> initLocalNotifications() async {
+    const initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    
+    // Konfigurasi untuk iOS dan macOS
+    const initializationSettingsDarwin = DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+    
+    const initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin,
+      macOS: initializationSettingsDarwin,
+    );
+
+    await _notificationsPlugin.initialize(initializationSettings);
+  }
+
+  Future<void> showNotification({required int id, required String title, required String body}) async {
+    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'tenangin_channel',
+      'Tenangin Notifications',
+      importance: Importance.max,
+      priority: Priority.high,
+      showWhen: false,
+    );
+    
+    const darwinPlatformChannelSpecifics = DarwinNotificationDetails();
+
+    const platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+      iOS: darwinPlatformChannelSpecifics,
+      macOS: darwinPlatformChannelSpecifics,
+    );
+
+    await _notificationsPlugin.show(
+      id,
+      title,
+      body,
+      platformChannelSpecifics,
+    );
+  }
+
   Future<List<NotificationModel>> getNotifications() async {
     final response = await ApiClient.get('/notifications');
 

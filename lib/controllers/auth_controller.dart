@@ -126,8 +126,14 @@ class AuthController extends ChangeNotifier {
     }
   }
 
-  Future<void> logout(VoidCallback onLogout) async {
+  Future<void> logout(BuildContext context, VoidCallback onLogout) async {
     final prefs = await SharedPreferences.getInstance();
+    
+    // Disconnect socket
+    if (context.mounted) {
+      context.read<SocketService>().disconnect();
+    }
+
     await prefs.remove('auth_token');
     await prefs.remove('refresh_token');
     await prefs.setBool('is_logged_in', false);

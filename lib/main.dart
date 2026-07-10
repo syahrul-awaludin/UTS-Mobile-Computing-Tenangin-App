@@ -18,8 +18,11 @@ import 'services/learn_service.dart';
 import 'services/community_service.dart';
 import 'services/profile_service.dart';
 import 'services/notification_service.dart';
+import 'services/socket_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService.initLocalNotifications();
   runApp(const TenanginApp());
 }
 
@@ -37,6 +40,7 @@ class TenanginApp extends StatelessWidget {
         Provider(create: (_) => CommunityService()),
         Provider(create: (_) => ProfileService()),
         Provider(create: (_) => NotificationService()),
+        ChangeNotifierProvider(create: (_) => SocketService()),
 
         // Controllers
         ChangeNotifierProxyProvider<AuthService, AuthController>(
