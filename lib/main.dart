@@ -1,6 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'theme/app_theme.dart';
-import 'screens/splash_screen.dart';
+import 'views/splash/splash_view.dart';
+
+// Controllers
+import 'controllers/auth_controller.dart';
+import 'controllers/home_controller.dart';
+import 'controllers/learn_controller.dart';
+import 'controllers/community_controller.dart';
+import 'controllers/profile_controller.dart';
+import 'controllers/notification_controller.dart';
+
+// Services
+import 'services/auth_service.dart';
+import 'services/home_service.dart';
+import 'services/learn_service.dart';
+import 'services/community_service.dart';
+import 'services/profile_service.dart';
+import 'services/notification_service.dart';
 
 void main() {
   runApp(const TenanginApp());
@@ -11,11 +28,49 @@ class TenanginApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Tenangin',
-      theme: AppTheme.lightTheme,
-      home: const SplashScreen(),
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        // Services
+        Provider(create: (_) => AuthService()),
+        Provider(create: (_) => HomeService()),
+        Provider(create: (_) => LearnService()),
+        Provider(create: (_) => CommunityService()),
+        Provider(create: (_) => ProfileService()),
+        Provider(create: (_) => NotificationService()),
+
+        // Controllers
+        ChangeNotifierProxyProvider<AuthService, AuthController>(
+          create: (context) => AuthController(context.read<AuthService>()),
+          update: (context, authService, previous) => previous ?? AuthController(authService),
+        ),
+        ChangeNotifierProxyProvider<HomeService, HomeController>(
+          create: (context) => HomeController(context.read<HomeService>()),
+          update: (context, homeService, previous) => previous ?? HomeController(homeService),
+        ),
+        ChangeNotifierProxyProvider<LearnService, LearnController>(
+          create: (context) => LearnController(context.read<LearnService>()),
+          update: (context, learnService, previous) => previous ?? LearnController(learnService),
+        ),
+        ChangeNotifierProxyProvider<CommunityService, CommunityController>(
+          create: (context) => CommunityController(context.read<CommunityService>()),
+          update: (context, communityService, previous) => previous ?? CommunityController(communityService),
+        ),
+        ChangeNotifierProxyProvider<ProfileService, ProfileController>(
+          create: (context) => ProfileController(context.read<ProfileService>()),
+          update: (context, profileService, previous) => previous ?? ProfileController(profileService),
+        ),
+        ChangeNotifierProxyProvider<NotificationService, NotificationController>(
+          create: (context) => NotificationController(context.read<NotificationService>()),
+          update: (context, notificationService, previous) => previous ?? NotificationController(notificationService),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Tenangin',
+        theme: AppTheme.lightTheme,
+        home: const SplashView(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
+

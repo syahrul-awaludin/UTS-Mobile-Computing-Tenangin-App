@@ -189,6 +189,9 @@
 | [`flutter_svg`](https://pub.dev/packages/flutter_svg) | `^2.0.10` | Render icon & aset SVG |
 | [`youtube_player_iframe`](https://pub.dev/packages/youtube_player_iframe) | latest | Embed & putar video YouTube |
 | [`cupertino_icons`](https://pub.dev/packages/cupertino_icons) | `^1.0.8` | Icon set bergaya iOS |
+| [`provider`](https://pub.dev/packages/provider) | latest | State Management (Clean Architecture) |
+| [`http`](https://pub.dev/packages/http) | latest | Klien REST API terpusat (`ApiClient`) |
+| [`shared_preferences`](https://pub.dev/packages/shared_preferences) | latest | Penyimpanan JWT & Refresh Token lokal |
 
 </div>
 
