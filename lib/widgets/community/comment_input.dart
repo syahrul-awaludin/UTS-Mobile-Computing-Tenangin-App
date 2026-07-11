@@ -53,23 +53,30 @@ class CommentInput extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.background,
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: TextField(
-                    controller: controller,
-                    focusNode: focusNode,
-                    style: AppTypography.body1Regular(),
-                    decoration: InputDecoration(
-                      hintText: 'Write a comment...',
-                      border: InputBorder.none,
-                      hintStyle: AppTypography.body1Regular(color: AppColors.textCaption),
+                child: TextField(
+                  controller: controller,
+                  focusNode: focusNode,
+                  style: AppTypography.body1Regular(),
+                  decoration: InputDecoration(
+                    hintText: 'Write a comment...',
+                    hintStyle: AppTypography.body1Regular(color: AppColors.textCaption),
+                    filled: true,
+                    fillColor: AppColors.background,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: const BorderSide(color: AppColors.borderDefault),
                     ),
-                    maxLines: null,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: const BorderSide(color: AppColors.borderDefault),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: const BorderSide(color: AppColors.primary),
+                    ),
                   ),
+                  maxLines: null,
                 ),
               ),
               const SizedBox(width: 12),
