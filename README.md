@@ -23,9 +23,23 @@ Aplikasi ini dikembangkan sebagai pemenuhan **Ujian Akhir Semester (UAS) Mata Ku
 
 ## 🛠 Arsitektur & Teknologi
 
-Sesuai dengan kriteria tugas, aplikasi ini menerapkan praktik pengembangan perangkat lunak terbaik:
+Aplikasi ini dibangun menggunakan arsitektur modern yang memisahkan antara *Client* (Frontend) dan *Server* (Backend). 
 
-### 1. Software Architecture (MVC)
+### 💻 Tech Stack
+- **Frontend (Mobile)**: Flutter (Dart)
+- **Backend (API)**: Node.js dengan framework Express.js
+- **State Management**: Provider
+- **Local Storage**: Shared Preferences
+- **Deployment**: Virtual Private Server (VPS) menggunakan PM2 sebagai *process manager*.
+
+### 🌐 Backend Server & API
+Backend aplikasi ini (Tenangin Backend) berjalan secara independen di VPS pribadi. Backend dibangun menggunakan Node.js dan menyediakan kumpulan RESTful API yang dikonsumsi oleh aplikasi Flutter. 
+Fitur backend mencakup:
+- **Autentikasi (JWT)**: Mengamankan *endpoint* agar hanya pengguna terdaftar yang bisa mengakses data.
+- **MVC Pattern**: Backend juga diatur menggunakan arsitektur berlapis (Routes -> Controllers -> Services) sehingga kode sangat *clean* dan *scalable*.
+- **Database Management**: Menyimpan data pengguna, *postingan* komunitas, komentar, dan metrik interaksi (like).
+
+### 🏗 Software Architecture Frontend (MVC)
 Aplikasi memisahkan tanggung jawab (Separation of Concerns) secara tegas menggunakan **Model-View-Controller (MVC)**:
 - **`models/`**: Mendefinisikan struktur objek data dari API (misal: `post_model.dart`).
 - **`views/`**: Hanya berisi UI/Desain (Widget Flutter) murni tanpa logika bisnis berat.
