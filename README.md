@@ -133,9 +133,10 @@ Berikut adalah pratinjau antarmuka pengguna (UI) dari aplikasi Tenangin:
 
 ### 3. Komunitas (Ruang Aman)
 <p align="center">
-  <img src="assets/screenshots/8-community.png" width="30%">
-  <img src="assets/screenshots/9-post_detail.png" width="30%">
-  <img src="assets/screenshots/10-add_post.png" width="30%">
+  <img src="assets/screenshots/8-community.png" width="23%">
+  <img src="assets/screenshots/12-filter_post.png" width="23%">
+  <img src="assets/screenshots/9-post_detail.png" width="23%">
+  <img src="assets/screenshots/10-add_post.png" width="23%">
 </p>
 
 ### 4. Notifikasi & Interaksi Real-time
