@@ -8,12 +8,12 @@ Aplikasi ini dikembangkan sebagai pemenuhan **Ujian Akhir Semester (UAS) Mata Ku
 
 ## 🔗 Tautan Penting
 - **Desain UI/UX (Figma):** [Tenangin App Design](https://www.figma.com/design/CQIr4hUXvJDOurfzkp16KW/Tenangin-App?node-id=1-16916&t=HwNnRGFx85OZlpUd-1)
-- **Repository Backend:** [Tenangin Backend](https://github.com/syahrul-awaludin/Tenangin-Backend) *(Sesuaikan link github backend jika berbeda)*
+- **Repository Backend:** [Tenangin Backend](https://github.com/syahrul-awaludin/Tenangin-Backend)
 
 ---
 
 ## ✨ Fitur Utama
-- **Sistem Autentikasi**: Login dan Register untuk pengguna menggunakan integrasi API.
+- **Sistem Autentikasi (API)**: Terdapat fitur *Login* dan *Register* yang terhubung langsung dengan REST API untuk mengelola akun pengguna dengan aman (menggunakan enkripsi password & JWT di backend).
 - **Home & Afirmasi Harian**: Tampilan beranda yang tenang dengan kutipan (afirmasi) harian yang di-generate.
 - **Community Forum**: Fitur di mana pengguna dapat membagikan cerita mereka, melihat cerita orang lain, serta melakukan interaksi (Like & Comment) yang tersinkronisasi langsung dengan REST API.
 - **Video Relaksasi (Learn)**: Daftar video untuk membantu pengguna menenangkan diri.
@@ -25,12 +25,18 @@ Aplikasi ini dikembangkan sebagai pemenuhan **Ujian Akhir Semester (UAS) Mata Ku
 
 Aplikasi ini dibangun menggunakan arsitektur modern yang memisahkan antara *Client* (Frontend) dan *Server* (Backend). 
 
-### 💻 Tech Stack
+### 💻 Tech Stack & Packages
 - **Frontend (Mobile)**: Flutter (Dart)
 - **Backend (API)**: Node.js dengan framework Express.js
-- **State Management**: Provider
-- **Local Storage**: Shared Preferences
 - **Deployment**: Virtual Private Server (VPS) menggunakan PM2 sebagai *process manager*.
+
+**Packages Utama (Flutter):**
+- `provider`: Digunakan untuk *State Management* agar logika aplikasi terpisah dari UI dan *re-render* efisien.
+- `http`: Digunakan untuk menangani *HTTP Requests* ke backend REST API.
+- `shared_preferences`: Berfungsi sebagai *Local Storage* untuk menyimpan *Auth Token* (Sesi Login) agar tersimpan secara permanen di perangkat.
+- `flutter_local_notifications`: Menangani pemunculan notifikasi (*Mobile Feature* wajib).
+- `image_picker`: Memungkinkan pengguna untuk memilih foto dari galeri/kamera untuk Avatar atau Postingan.
+- `video_player` / `chewie`: Untuk memutar video lokal atau dari URL secara *native* pada halaman relaksasi.
 
 ### 🌐 Backend Server & API
 Backend aplikasi ini (Tenangin Backend) berjalan secara independen di VPS pribadi. Backend dibangun menggunakan Node.js dan menyediakan kumpulan RESTful API yang dikonsumsi oleh aplikasi Flutter. 
@@ -67,6 +73,7 @@ Aplikasi menggunakan **Local Notification** (via `flutter_local_notifications`) 
 *(Screenshot aplikasi akan ditambahkan di sini)*
 <!-- Tambahkan tag gambar / markdown image di bawah ini nanti -->
 - Login Screen: 
+- Register Screen: 
 - Home Screen: 
 - Community Screen: 
 
