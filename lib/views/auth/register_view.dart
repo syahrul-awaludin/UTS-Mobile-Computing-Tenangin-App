@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/auth_controller.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 import '../../widgets/auth/auth_input_field.dart';
 import '../../widgets/common/app_primary_button.dart';
 import '../../widgets/common/social_login_button.dart';
@@ -47,22 +48,14 @@ class RegisterView extends StatelessWidget {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             'Create Account',
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.textHeading,
-                              fontFamily: 'Inter',
-                            ),
+                            style: AppTypography.headlineH1Bold(),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
+                          Text(
                             'Sign up to get started with Tenangin.',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: AppColors.textCaption,
-                            ),
+                            style: AppTypography.body2Regular(color: AppColors.textCaption),
                           ),
                           const SizedBox(height: 32),
 

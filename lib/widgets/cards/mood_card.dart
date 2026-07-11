@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 import '../../models/mood_model.dart';
 
 class MoodCard extends StatelessWidget {
@@ -36,22 +37,12 @@ class MoodCard extends StatelessWidget {
                   children: [
                     Text(
                       date,
-                      style: const TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.textCaption,
-                      ),
+                      style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption).copyWith(fontSize: 12),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       feeling,
-                      style: const TextStyle(
-                        fontFamily: 'Inter',
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textHeading,
-                      ),
+                      style: AppTypography.titleSemiBold(),
                     ),
                   ],
                 ),

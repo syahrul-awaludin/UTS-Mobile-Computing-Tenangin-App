@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/community_controller.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 import '../../widgets/common/app_primary_button.dart';
 import '../../models/post_model.dart';
 
@@ -17,7 +18,7 @@ class AddPostView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: Text(isEditing ? 'Edit Post' : 'New Post', style: const TextStyle(color: AppColors.textHeading, fontWeight: FontWeight.w600)),
+        title: Text(isEditing ? 'Edit Post' : 'New Post', style: AppTypography.titleSemiBold()),
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: AppColors.textHeading),
@@ -28,44 +29,18 @@ class AddPostView extends StatelessWidget {
           children: [
             TextField(
               controller: communityController.postSubjectController,
-              decoration: InputDecoration(
+              style: AppTypography.body1Regular(),
+              decoration: const InputDecoration(
                 hintText: 'Subject',
-                fillColor: Colors.white,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(color: AppColors.borderDefault),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(color: AppColors.borderDefault),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
               ),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: communityController.postContentController,
               maxLines: 8,
-              decoration: InputDecoration(
+              style: AppTypography.body1Regular(),
+              decoration: const InputDecoration(
                 hintText: 'Write something about this moment...',
-                fillColor: Colors.white,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(color: AppColors.borderDefault),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(color: AppColors.borderDefault),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(color: AppColors.primary),
-                ),
               ),
             ),
             const SizedBox(height: 32),

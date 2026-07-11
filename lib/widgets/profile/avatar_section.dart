@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 
 class AvatarSection extends StatelessWidget {
   final String userName;
@@ -40,12 +41,7 @@ class AvatarSection extends StatelessWidget {
         const SizedBox(height: 16),
         Text(
           userName,
-          style: const TextStyle(
-            fontFamily: 'SF Pro',
-            fontWeight: FontWeight.w600,
-            fontSize: 19,
-            color: AppColors.textHeading,
-          ),
+          style: AppTypography.subHeadingSemiBold(),
         ),
       ],
     );

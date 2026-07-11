@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/comment_model.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 
 class CommentInput extends StatelessWidget {
   final CommentModel? replyingTo;
@@ -39,8 +40,8 @@ class CommentInput extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 8),
               child: Row(
                 children: [
-                  const Text('Replying to ', style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: AppColors.textCaption)),
-                  Text(replyingTo!.userName, style: const TextStyle(fontFamily: 'Inter', fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.primary)),
+                  Text('Replying to ', style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption).copyWith(fontSize: 12)),
+                  Text(replyingTo!.userName, style: AppTypography.smallDescriptionSemiBold(color: AppColors.primary).copyWith(fontSize: 12)),
                   const Spacer(),
                   GestureDetector(
                     onTap: onCancelReply,
@@ -61,10 +62,11 @@ class CommentInput extends StatelessWidget {
                   child: TextField(
                     controller: controller,
                     focusNode: focusNode,
-                    decoration: const InputDecoration(
+                    style: AppTypography.body1Regular(),
+                    decoration: InputDecoration(
                       hintText: 'Write a comment...',
                       border: InputBorder.none,
-                      hintStyle: TextStyle(color: AppColors.textCaption, fontSize: 14),
+                      hintStyle: AppTypography.body1Regular(color: AppColors.textCaption),
                     ),
                     maxLines: null,
                   ),

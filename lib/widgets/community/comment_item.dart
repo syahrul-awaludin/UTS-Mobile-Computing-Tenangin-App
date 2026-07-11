@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../controllers/community_controller.dart';
 import '../../models/comment_model.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 
 class CommentItem extends StatelessWidget {
   final CommentModel comment;
@@ -50,24 +51,24 @@ class CommentItem extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(comment.userName, style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.bold, fontSize: 13, color: AppColors.textHeading)),
+                        Text(comment.userName, style: AppTypography.body2SemiBold()),
                         const SizedBox(width: 8),
                         Text(
                           comment.updatedAt.isAfter(comment.createdAt.add(const Duration(seconds: 1)))
                               ? '${_timeAgo(comment.updatedAt)} (Edited)'
                               : _timeAgo(comment.createdAt),
-                          style: const TextStyle(fontFamily: 'Inter', fontSize: 11, color: AppColors.textCaption),
+                          style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption).copyWith(fontSize: 11),
                         ),
                         const Spacer(),
                         CommentMenu(comment: comment, currentUserId: currentUserId, onRefresh: onRefresh),
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(comment.text, style: const TextStyle(fontFamily: 'Inter', fontSize: 14, color: AppColors.textHeading)),
+                    Text(comment.text, style: AppTypography.body2Regular()),
                     const SizedBox(height: 4),
                     GestureDetector(
                       onTap: () => onReply(comment),
-                      child: const Text('Reply', style: TextStyle(fontFamily: 'Inter', fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.primary)),
+                      child: Text('Reply', style: AppTypography.smallDescriptionSemiBold(color: AppColors.primary).copyWith(fontSize: 12)),
                     ),
                   ],
                 ),
@@ -95,20 +96,20 @@ class CommentItem extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Text(reply.userName, style: const TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.bold, fontSize: 12, color: AppColors.textHeading)),
+                                Text(reply.userName, style: AppTypography.body2SemiBold().copyWith(fontSize: 12)),
                                 const SizedBox(width: 8),
                                 Text(
                                   reply.updatedAt.isAfter(reply.createdAt.add(const Duration(seconds: 1)))
                                       ? '${_timeAgo(reply.updatedAt)} (Edited)'
                                       : _timeAgo(reply.createdAt),
-                                  style: const TextStyle(fontFamily: 'Inter', fontSize: 10, color: AppColors.textCaption),
+                                  style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption).copyWith(fontSize: 10),
                                 ),
                                 const Spacer(),
                                 CommentMenu(comment: reply, currentUserId: currentUserId, isReply: true, onRefresh: onRefresh),
                               ],
                             ),
                             const SizedBox(height: 2),
-                            Text(reply.text, style: const TextStyle(fontFamily: 'Inter', fontSize: 13, color: AppColors.textHeading)),
+                            Text(reply.text, style: AppTypography.body2Regular().copyWith(fontSize: 13)),
                           ],
                         ),
                       ),
@@ -151,7 +152,7 @@ class CommentMenu extends StatelessWidget {
             builder: (ctx) => AlertDialog(
               backgroundColor: Colors.white,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              title: const Text('Edit Comment', style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.bold, color: AppColors.textHeading)),
+              title: Text('Edit Comment', style: AppTypography.titleSemiBold()),
               content: TextField(
                 controller: textController,
                 maxLines: 3,
@@ -160,11 +161,11 @@ class CommentMenu extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(ctx, false),
-                  child: const Text('Cancel', style: TextStyle(color: AppColors.textCaption)),
+                  child: Text('Cancel', style: AppTypography.body1Regular(color: AppColors.textCaption)),
                 ),
                 TextButton(
                   onPressed: () => Navigator.pop(ctx, true),
-                  child: const Text('Save', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+                  child: Text('Save', style: AppTypography.body1SemiBold(color: AppColors.primary)),
                 ),
               ],
             ),
@@ -180,16 +181,16 @@ class CommentMenu extends StatelessWidget {
             builder: (ctx) => AlertDialog(
               backgroundColor: Colors.white,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              title: const Text('Delete Comment?', style: TextStyle(fontFamily: 'Inter', fontWeight: FontWeight.bold, color: AppColors.textHeading)),
-              content: const Text('This comment will be permanently deleted.', style: TextStyle(fontFamily: 'Inter', color: AppColors.textCaption)),
+              title: Text('Delete Comment?', style: AppTypography.titleSemiBold()),
+              content: Text('This comment will be permanently deleted.', style: AppTypography.body1Regular(color: AppColors.textCaption)),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(ctx, false),
-                  child: const Text('Cancel', style: TextStyle(color: AppColors.textCaption, fontWeight: FontWeight.w600)),
+                  child: Text('Cancel', style: AppTypography.body1SemiBold(color: AppColors.textCaption)),
                 ),
                 TextButton(
                   onPressed: () => Navigator.pop(ctx, true),
-                  child: const Text('Delete', style: TextStyle(color: AppColors.moodStress, fontWeight: FontWeight.bold)),
+                  child: Text('Delete', style: AppTypography.body1SemiBold(color: AppColors.moodStress)),
                 ),
               ],
             ),
@@ -205,18 +206,18 @@ class CommentMenu extends StatelessWidget {
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         if (currentUserId != null && currentUserId == comment.authorId) ...[
-          const PopupMenuItem<String>(
+          PopupMenuItem<String>(
             value: 'edit',
-            child: Text('Edit Comment', style: TextStyle(fontFamily: 'Inter', color: AppColors.textHeading, fontSize: 13, fontWeight: FontWeight.w500)),
+            child: Text('Edit Comment', style: AppTypography.body2Medium()),
           ),
-          const PopupMenuItem<String>(
+          PopupMenuItem<String>(
             value: 'delete',
-            child: Text('Delete Comment', style: TextStyle(fontFamily: 'Inter', color: AppColors.moodStress, fontSize: 13, fontWeight: FontWeight.w500)),
+            child: Text('Delete Comment', style: AppTypography.body2Medium(color: AppColors.moodStress)),
           ),
         ] else
-          const PopupMenuItem<String>(
+          PopupMenuItem<String>(
             value: 'report',
-            child: Text('Report', style: TextStyle(fontFamily: 'Inter', color: AppColors.textHeading, fontSize: 13, fontWeight: FontWeight.w500)),
+            child: Text('Report', style: AppTypography.body2Medium()),
           ),
       ],
     );

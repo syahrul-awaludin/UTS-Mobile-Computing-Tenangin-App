@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../controllers/auth_controller.dart';
 import '../../controllers/community_controller.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 import '../cards/post_card.dart';
 
 class CommunityContent extends StatelessWidget {
@@ -27,7 +28,7 @@ class CommunityContent extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               controller.errorMessage!,
-              style: const TextStyle(color: AppColors.textCaption),
+              style: AppTypography.body2Regular(color: AppColors.textCaption),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -46,12 +47,12 @@ class CommunityContent extends StatelessWidget {
         color: AppColors.primary,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
-          children: const [
-            SizedBox(height: 60),
+          children: [
+            const SizedBox(height: 60),
             Center(
               child: Text(
                 'No posts found.',
-                style: TextStyle(color: AppColors.textCaption),
+                style: AppTypography.body2Regular(color: AppColors.textCaption),
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 import '../../models/course_model.dart';
 
 /// A list item card used in vertical course/meditation lists
@@ -43,8 +44,7 @@ class CourseListItem extends StatelessWidget {
                 children: [
                   Text(
                     course.title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 16),
+                    style: AppTypography.titleSemiBold(),
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -53,16 +53,14 @@ class CourseListItem extends StatelessWidget {
                           size: 14, color: AppColors.textCaption),
                       const SizedBox(width: 4),
                       Text(course.duration,
-                          style: const TextStyle(
-                              fontSize: 12, color: AppColors.textCaption)),
+                          style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption)),
                       if (course.mood.isNotEmpty) ...[
                         const SizedBox(width: 12),
                         const Icon(Icons.favorite_border,
                             size: 14, color: AppColors.textCaption),
                         const SizedBox(width: 4),
                         Text(course.mood,
-                            style: const TextStyle(
-                                fontSize: 12, color: AppColors.textCaption)),
+                            style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption)),
                       ],
                     ],
                   ),

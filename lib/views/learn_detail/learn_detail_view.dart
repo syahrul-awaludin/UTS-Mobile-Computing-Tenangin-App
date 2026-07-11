@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 import '../../widgets/cards/course_list_item.dart';
 import '../../widgets/common/app_primary_button.dart';
 import '../../widgets/learn/tag_chip.dart';
@@ -115,11 +116,7 @@ class LearnDetailView extends StatelessWidget {
                   Text(
                     course.title,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textHeading,
-                    ),
+                    style: AppTypography.headlineH3SemiBold(),
                   ),
                   const SizedBox(height: 16),
                   Row(
@@ -151,13 +148,9 @@ class LearnDetailView extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  const Text(
+                  Text(
                     'Mindset Course',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textHeading,
-                    ),
+                    style: AppTypography.titleSemiBold(),
                   ),
                   const SizedBox(height: 16),
                   ...List.generate(_courses.length, (i) => Padding(

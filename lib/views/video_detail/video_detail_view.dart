@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:provider/provider.dart';
 import 'package:chewie/chewie.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import '../../controllers/video_detail_controller.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 
-class VideoDetailView extends StatefulWidget {
+class VideoDetailView extends StatelessWidget {
   final String title;
   final String videoId;
 
@@ -15,65 +16,22 @@ class VideoDetailView extends StatefulWidget {
   });
 
   @override
-  State<VideoDetailView> createState() => _VideoDetailViewState();
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => VideoDetailController()..initializePlayer(videoId),
+      child: _VideoDetailContent(title: title),
+    );
+  }
 }
 
-class _VideoDetailViewState extends State<VideoDetailView> {
-  late VideoPlayerController _videoPlayerController;
-  ChewieController? _chewieController;
-  final yt = YoutubeExplode();
-  bool _isLoading = true;
-  String? _errorMessage;
-  String? _videoTitle;
-  String? _videoDescription;
-  String? _videoAuthor;
-
-  @override
-  void initState() {
-    super.initState();
-    _initPlayer();
-  }
-
-  Future<void> _initPlayer() async {
-    try {
-      final video = await yt.videos.get(widget.videoId);
-      final manifest = await yt.videos.streamsClient.getManifest(widget.videoId);
-      final streamInfo = manifest.muxed.withHighestBitrate();
-
-      _videoPlayerController = VideoPlayerController.networkUrl(streamInfo.url);
-      await _videoPlayerController.initialize();
-
-      _chewieController = ChewieController(
-        videoPlayerController: _videoPlayerController,
-        autoPlay: true,
-        looping: false,
-        aspectRatio: 16 / 9,
-      );
-
-      setState(() {
-        _videoTitle = video.title;
-        _videoDescription = video.description;
-        _videoAuthor = video.author;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-        _errorMessage = e.toString();
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _videoPlayerController.dispose();
-    _chewieController?.dispose();
-    yt.close();
-    super.dispose();
-  }
+class _VideoDetailContent extends StatelessWidget {
+  final String title;
+  const _VideoDetailContent({required this.title});
 
   @override
   Widget build(BuildContext context) {
+    final controller = context.watch<VideoDetailController>();
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -96,111 +54,116 @@ class _VideoDetailViewState extends State<VideoDetailView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Container(
-                  color: Colors.black,
-                  child: _isLoading
-                      ? const Center(child: CircularProgressIndicator())
-                      : _errorMessage != null
-                          ? Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Text('Error: $_errorMessage', style: const TextStyle(color: Colors.white)),
-                              ),
-                            )
-                          : Chewie(controller: _chewieController!),
-                ),
-              ),
-            ),
+            _buildVideoPlayer(controller),
             const SizedBox(height: 24),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _videoTitle ?? widget.title,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.textHeading,
-                          fontFamily: 'Inter',
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        _videoDescription != null && _videoDescription!.isNotEmpty
-                            ? (_videoDescription!.length > 150
-                                ? '${_videoDescription!.substring(0, 150)}...'
-                                : _videoDescription!)
-                            : 'Bring a sense of spaciousness into your day\nwith a quick breathing exercise.',
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: AppColors.textCaption,
-                          height: 1.4,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 16),
-                const Icon(Icons.favorite_border,
-                    color: AppColors.textHeading, size: 28),
-              ],
-            ),
+            _buildVideoInfo(controller, title),
             const SizedBox(height: 32),
-            const Text(
-              'Teacher',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: AppColors.textHeading,
-              ),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFFFE082),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Center(
-                      child: Text('👩🏼', style: TextStyle(fontSize: 24)),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Text(
-                      _videoAuthor ?? 'Michelle Jane',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.textHeading,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _buildTeacherInfo(controller),
             const SizedBox(height: 32),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildVideoPlayer(VideoDetailController controller) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(24),
+      child: AspectRatio(
+        aspectRatio: 16 / 9,
+        child: Container(
+          color: Colors.black,
+          child: controller.isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : controller.errorMessage != null
+                  ? Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          'Error: ${controller.errorMessage}',
+                          style: AppTypography.body1Regular(color: Colors.white),
+                        ),
+                      ),
+                    )
+                  : Chewie(controller: controller.chewieController!),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVideoInfo(VideoDetailController controller, String fallbackTitle) {
+    final displayTitle = controller.videoTitle ?? fallbackTitle;
+    final displayDescription = (controller.videoDescription != null && controller.videoDescription!.isNotEmpty)
+        ? (controller.videoDescription!.length > 150
+            ? '${controller.videoDescription!.substring(0, 150)}...'
+            : controller.videoDescription!)
+        : 'Bring a sense of spaciousness into your day\nwith a quick breathing exercise.';
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                displayTitle,
+                style: AppTypography.headlineH3SemiBold(),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                displayDescription,
+                style: AppTypography.body2Regular(color: AppColors.textCaption),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 16),
+        const Icon(Icons.favorite_border, color: AppColors.textHeading, size: 28),
+      ],
+    );
+  }
+
+  Widget _buildTeacherInfo(VideoDetailController controller) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Teacher',
+          style: AppTypography.titleSemiBold(),
+        ),
+        const SizedBox(height: 16),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 50,
+                height: 50,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFE082),
+                  shape: BoxShape.circle,
+                ),
+                child: const Center(
+                  child: Text('👩🏼', style: TextStyle(fontSize: 24)),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  controller.videoAuthor ?? 'Michelle Jane',
+                  style: AppTypography.body1Medium(),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

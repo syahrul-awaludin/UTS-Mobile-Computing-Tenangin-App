@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 
 /// Reusable search bar widget used in Learn screen
 class AppSearchBar extends StatelessWidget {
@@ -34,12 +35,10 @@ class AppSearchBar extends StatelessWidget {
               onChanged: onChanged,
               decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle: const TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 14,
-                  color: AppColors.textCaption,
-                ),
+                hintStyle: AppTypography.body2Regular(color: AppColors.textCaption),
                 border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
               ),
             ),
           ),

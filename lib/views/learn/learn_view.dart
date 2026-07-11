@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/learn_controller.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 import '../../widgets/cards/course_list_item.dart';
 import '../../widgets/common/app_search_bar.dart';
 import '../../widgets/common/section_header.dart';
@@ -21,13 +22,9 @@ class _LearnViewState extends State<LearnView> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Learn',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: AppColors.textHeading,
-          ),
+          style: AppTypography.headlineH1Bold(),
         ),
         centerTitle: false,
         backgroundColor: AppColors.background,
@@ -50,12 +47,12 @@ class _LearnViewState extends State<LearnView> {
               SectionHeader(title: 'Mindset Course'),
               const SizedBox(height: 16),
               if (controller.filteredCourses.isEmpty)
-                const Padding(
-                  padding: EdgeInsets.all(24.0),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
                   child: Center(
                     child: Text(
                       'No courses found.',
-                      style: TextStyle(color: AppColors.textCaption),
+                      style: AppTypography.body1Regular(color: AppColors.textCaption),
                     ),
                   ),
                 )

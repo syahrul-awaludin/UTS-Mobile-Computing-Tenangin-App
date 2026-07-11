@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 import '../../models/course_model.dart';
 
 /// A card used in horizontal scroll lists (Today's Meditation, Personality Tests)
@@ -45,8 +46,7 @@ class CourseCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     course.title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 16),
+                    style: AppTypography.titleSemiBold(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -64,16 +64,14 @@ class CourseCard extends StatelessWidget {
                     size: 14, color: AppColors.textCaption),
                 const SizedBox(width: 4),
                 Text(course.duration,
-                    style: const TextStyle(
-                        fontSize: 12, color: AppColors.textCaption)),
+                    style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption).copyWith(fontSize: 12)),
                 if (course.mood.isNotEmpty) ...[
                   const SizedBox(width: 8),
                   const Icon(Icons.article_outlined,
                       size: 14, color: AppColors.textCaption),
                   const SizedBox(width: 4),
                   Text(course.mood,
-                      style: const TextStyle(
-                          fontSize: 12, color: AppColors.textCaption)),
+                      style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption).copyWith(fontSize: 12)),
                 ],
               ],
             ),

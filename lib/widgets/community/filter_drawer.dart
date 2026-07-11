@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/community_controller.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 
 class FilterDrawer extends StatelessWidget {
   const FilterDrawer({super.key});
@@ -16,16 +17,11 @@ class FilterDrawer extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(20.0),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
                   child: Text(
                     'Filter Posts',
-                    style: TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.textHeading,
-                    ),
+                    style: AppTypography.titleSemiBold(),
                   ),
                 ),
                 const Divider(height: 1, color: AppColors.borderDefault),
@@ -70,11 +66,9 @@ class FilterDrawer extends StatelessWidget {
       leading: Icon(icon, color: isSelected ? AppColors.primary : AppColors.textCaption),
       title: Text(
         title,
-        style: TextStyle(
-          fontFamily: 'Inter',
-          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-          color: isSelected ? AppColors.primary : AppColors.textHeading,
-        ),
+        style: isSelected
+            ? AppTypography.body1SemiBold(color: AppColors.primary)
+            : AppTypography.body1Regular(color: AppColors.textHeading),
       ),
       trailing: isSelected ? const Icon(Icons.check, color: AppColors.primary) : null,
       onTap: () {

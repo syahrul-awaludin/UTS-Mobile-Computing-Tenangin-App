@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/community_controller.dart';
 import '../../theme/app_colors.dart';
+import '../../theme/app_typography.dart';
 import '../../widgets/community/community_content.dart';
 import '../../widgets/community/filter_drawer.dart';
 import '../../widgets/common/app_search_bar.dart';
@@ -16,13 +17,9 @@ class CommunityView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Community',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: AppColors.textHeading,
-          ),
+          style: AppTypography.headlineH1Bold(),
         ),
         actions: [
           const NotificationBadge(),
@@ -47,7 +44,7 @@ class CommunityView extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 child: AppSearchBar(
                   controller: controller.searchController,
-                  hintText: 'Search by subject...',
+                  hintText: 'Search discussions or topics...',
                   onChanged: controller.updateSearch,
                 ),
               ),
