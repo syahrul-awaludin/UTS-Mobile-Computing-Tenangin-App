@@ -28,6 +28,7 @@ Proyek ini dikembangkan sebagai bentuk pemenuhan tugas **Ujian Akhir Semester (U
 - **Auto-Login**: Menggunakan *Shared Preferences*, token disimpan di perangkat pengguna, membebaskan pengguna dari keharusan *login* berulang setiap kali membuka aplikasi.
 
 ### 2. Community Forum (REST API)
+- **Mendukung fitur Create, Read, Update, Delete (CRUD)** untuk memfasilitasi forum komunitas Tenangin.
 - Mengambil (*fetch*) daftar postingan terbaru (List Data) secara *real-time* dari Backend REST API.
 - Fitur interaktif: *Create Post*, *Like Post*, dan *Comment* yang tersinkronisasi langsung ke *database* di server VPS.
 
