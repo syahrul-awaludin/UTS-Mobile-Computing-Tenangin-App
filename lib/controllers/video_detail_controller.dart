@@ -4,7 +4,7 @@ import 'package:chewie/chewie.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class VideoDetailController extends ChangeNotifier {
-  late VideoPlayerController _videoPlayerController;
+  VideoPlayerController? _videoPlayerController;
   ChewieController? _chewieController;
   final _yt = YoutubeExplode();
   
@@ -14,12 +14,20 @@ class VideoDetailController extends ChangeNotifier {
   String? _videoDescription;
   String? _videoAuthor;
 
+  bool _isLiked = false;
+  bool get isLiked => _isLiked;
+
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   String? get videoTitle => _videoTitle;
   String? get videoDescription => _videoDescription;
   String? get videoAuthor => _videoAuthor;
   ChewieController? get chewieController => _chewieController;
+
+  void toggleLike() {
+    _isLiked = !_isLiked;
+    notifyListeners();
+  }
 
   Future<void> initializePlayer(String videoId) async {
     try {
@@ -28,10 +36,10 @@ class VideoDetailController extends ChangeNotifier {
       final streamInfo = manifest.muxed.withHighestBitrate();
 
       _videoPlayerController = VideoPlayerController.networkUrl(streamInfo.url);
-      await _videoPlayerController.initialize();
+      await _videoPlayerController!.initialize();
 
       _chewieController = ChewieController(
-        videoPlayerController: _videoPlayerController,
+        videoPlayerController: _videoPlayerController!,
         autoPlay: true,
         looping: false,
         aspectRatio: 16 / 9,
@@ -51,9 +59,10 @@ class VideoDetailController extends ChangeNotifier {
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
+    _videoPlayerController?.dispose();
     _chewieController?.dispose();
     _yt.close();
     super.dispose();
   }
 }
+

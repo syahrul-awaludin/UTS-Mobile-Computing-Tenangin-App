@@ -34,7 +34,11 @@ Proyek ini dikembangkan sebagai bentuk pemenuhan tugas **Ujian Akhir Semester (U
 ### 3. Learn & Meditate (Video Player)
 - Kumpulan konten multimedia (*video playback*) untuk mendukung meditasi dan relaksasi visual pengguna.
 
-### 4. Local Notification (Mobile Feature)
+### 4. Real-time Interactions (WebSocket)
+- **Notifikasi *In-App* Instan**: Mendapatkan *alert* (pop-down) secara *real-time* tanpa *refresh* jika ada pengguna lain yang menyukai atau mengomentari postingan.
+- **Pembaruan UI Live**: Angka jumlah *Like* dan *Comment* pada halaman Komunitas berubah secara langsung seiring interaksi yang terjadi di *backend*.
+
+### 5. Local Notification (Mobile Feature)
 - Mengimplementasikan pemberitahuan (*push alert*) berbasis sistem internal perangkat (*local*) menggunakan `flutter_local_notifications` tanpa membutuhkan layanan *cloud messaging* eksternal.
 
 ---
@@ -50,8 +54,9 @@ lib/
  │   └── community_controller.dart
  ├── models/             # Struktur data berorientasi objek (OOP) untuk mapping JSON API
  │   └── post_model.dart
- ├── services/           # Interaksi ke luar sistem (HTTP REST API & Notifikasi)
+ ├── services/           # Interaksi ke luar sistem (HTTP REST API, WebSocket & Notifikasi)
  │   ├── api_client.dart
+ │   ├── socket_service.dart
  │   └── notification_service.dart
  ├── theme/              # Design System (Warna, Tipografi, Style Global)
  │   ├── app_colors.dart
@@ -77,6 +82,8 @@ lib/
 - `http`: Mengelola proses pengambilan data (*HTTP Client*) asinkronus dengan Backend REST API.
 - `shared_preferences`: Berperan sebagai **Local Storage** untuk menyimpan dan membaca data sederhana (seperti sesi `auth_token`).
 - `flutter_local_notifications`: Paket esensial untuk memunculkan notifikasi perangkat keras lokal (*Native Mobile Feature*).
+- `socket_io_client`: Mengelola koneksi WebSocket untuk fitur *real-time* (Pembaruan UI dan notifikasi instan dari *backend*).
+- `overlay_support`: Menampilkan *banner* notifikasi *in-app* (muncul dari bagian atas layar) saat aplikasi sedang dibuka.
 - `image_picker`: Memanfaatkan sensor perangkat (Kamera/Galeri lokal) untuk mengunggah gambar.
 - `video_player` / `youtube_player_iframe`: Pemutar media visual pendukung fitur *Learn*.
 

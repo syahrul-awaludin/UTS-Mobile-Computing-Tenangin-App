@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_colors.dart';
-import '../../theme/app_typography.dart';
 
-/// Reusable search bar widget used in Learn screen
+/// A clean, standalone search bar widget used across the app.
+/// Matches the design system of text fields but is semantically built for search.
 class AppSearchBar extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
@@ -26,15 +26,20 @@ class _AppSearchBarState extends State<AppSearchBar> {
   @override
   void initState() {
     super.initState();
-    _focusNode.addListener(() {
+    _focusNode.addListener(_handleFocusChange);
+  }
+
+  void _handleFocusChange() {
+    if (mounted) {
       setState(() {
         _isFocused = _focusNode.hasFocus;
       });
-    });
+    }
   }
 
   @override
   void dispose() {
+    _focusNode.removeListener(_handleFocusChange);
     _focusNode.dispose();
     super.dispose();
   }
@@ -44,7 +49,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
     return Container(
       height: 52,
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(40),
         border: Border.all(
           color: _isFocused ? AppColors.primary : AppColors.borderDefault,
@@ -57,28 +62,27 @@ class _AppSearchBarState extends State<AppSearchBar> {
           Icon(
             Icons.search,
             color: _isFocused ? AppColors.primary : AppColors.textCaption,
-            size: 24,
           ),
           const SizedBox(width: 12),
           Expanded(
             child: TextField(
-              controller: widget.controller,
               focusNode: _focusNode,
+              controller: widget.controller,
               onChanged: widget.onChanged,
-              style: AppTypography.body1Regular(color: AppColors.textHeading),
               decoration: InputDecoration(
-                hintText: widget.hintText,
-                hintStyle: AppTypography.body2Regular(color: AppColors.textCaption),
+                filled: false,
+                hoverColor: Colors.transparent,
+                focusColor: Colors.transparent,
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 errorBorder: InputBorder.none,
                 disabledBorder: InputBorder.none,
-                hoverColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                filled: false,
-                contentPadding: EdgeInsets.zero,
-                isDense: true,
+                hintText: widget.hintText,
+                hintStyle: const TextStyle(
+                  color: AppColors.textCaption,
+                  fontSize: 14,
+                ),
               ),
             ),
           ),

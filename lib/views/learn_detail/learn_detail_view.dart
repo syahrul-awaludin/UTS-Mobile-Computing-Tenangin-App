@@ -140,7 +140,7 @@ class LearnDetailView extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => VideoDetailView(
-                              title: course.title,
+                              fallbackTitle: course.title,
                               videoId: course.youtubeVideoId,
                             ),
                         ),
@@ -161,7 +161,7 @@ class LearnDetailView extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => VideoDetailView(
-                              title: _courses[i].title,
+                              fallbackTitle: _courses[i].title,
                               videoId: _courses[i].youtubeVideoId,
                             ),
                         ),

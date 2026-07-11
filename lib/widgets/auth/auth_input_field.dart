@@ -7,6 +7,7 @@ class AuthInputField extends StatefulWidget {
   final String hint;
   final bool obscure;
   final Widget? trailing;
+  final ValueChanged<String>? onChanged;
 
   const AuthInputField({
     super.key,
@@ -15,6 +16,7 @@ class AuthInputField extends StatefulWidget {
     required this.hint,
     required this.obscure,
     this.trailing,
+    this.onChanged,
   });
 
   @override
@@ -66,6 +68,7 @@ class _AuthInputFieldState extends State<AuthInputField> {
               focusNode: _focusNode,
               controller: widget.controller,
               obscureText: widget.obscure,
+              onChanged: widget.onChanged,
               decoration: InputDecoration(
                 filled: false,
                 hoverColor: Colors.transparent,

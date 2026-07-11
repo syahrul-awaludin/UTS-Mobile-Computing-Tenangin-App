@@ -3,41 +3,52 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiClient {
-  static const String _baseUrl = 'https://tenangin.syahrulawaludin.my.id/api/v1';
+  static const String _baseUrl =
+      'https://tenangin.syahrulawaludin.my.id/api/v1';
   static final http.Client _client = http.Client();
 
   static Future<http.Response> get(String endpoint) async {
-    return _requestWithRetry(() => _client.get(
-          Uri.parse('$_baseUrl$endpoint'),
-          headers: _getHeaders(null),
-        ));
+    return _requestWithRetry(
+      () => _client.get(
+        Uri.parse('$_baseUrl$endpoint'),
+        headers: _getHeaders(null),
+      ),
+    );
   }
 
   static Future<http.Response> post(String endpoint, {dynamic body}) async {
-    return _requestWithRetry(() => _client.post(
-          Uri.parse('$_baseUrl$endpoint'),
-          headers: _getHeaders('application/json'),
-          body: body != null ? jsonEncode(body) : null,
-        ));
+    return _requestWithRetry(
+      () => _client.post(
+        Uri.parse('$_baseUrl$endpoint'),
+        headers: _getHeaders('application/json'),
+        body: body != null ? jsonEncode(body) : null,
+      ),
+    );
   }
 
   static Future<http.Response> put(String endpoint, {dynamic body}) async {
-    return _requestWithRetry(() => _client.put(
-          Uri.parse('$_baseUrl$endpoint'),
-          headers: _getHeaders('application/json'),
-          body: body != null ? jsonEncode(body) : null,
-        ));
+    return _requestWithRetry(
+      () => _client.put(
+        Uri.parse('$_baseUrl$endpoint'),
+        headers: _getHeaders('application/json'),
+        body: body != null ? jsonEncode(body) : null,
+      ),
+    );
   }
 
   static Future<http.Response> delete(String endpoint, {dynamic body}) async {
-    return _requestWithRetry(() => _client.delete(
-          Uri.parse('$_baseUrl$endpoint'),
-          headers: _getHeaders('application/json'),
-          body: body != null ? jsonEncode(body) : null,
-        ));
+    return _requestWithRetry(
+      () => _client.delete(
+        Uri.parse('$_baseUrl$endpoint'),
+        headers: _getHeaders('application/json'),
+        body: body != null ? jsonEncode(body) : null,
+      ),
+    );
   }
 
-  static Future<http.Response> _requestWithRetry(Future<http.Response> Function() request) async {
+  static Future<http.Response> _requestWithRetry(
+    Future<http.Response> Function() request,
+  ) async {
     await _loadTokens();
     var response = await request();
 
@@ -52,7 +63,7 @@ class ApiClient {
   }
 
   static String? _accessToken;
-  
+
   static Future<void> _loadTokens() async {
     final prefs = await SharedPreferences.getInstance();
     _accessToken = prefs.getString('auth_token');

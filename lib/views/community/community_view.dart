@@ -36,24 +36,27 @@ class CommunityView extends StatelessWidget {
         scrolledUnderElevation: 0,
       ),
       endDrawer: const FilterDrawer(),
-      body: Consumer<CommunityController>(
-        builder: (context, controller, _) {
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                child: AppSearchBar(
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: Builder(
+              builder: (context) {
+                final controller = context.read<CommunityController>();
+                return AppSearchBar(
                   controller: controller.searchController,
                   hintText: 'Search discussions or topics...',
-                  onChanged: controller.updateSearch,
-                ),
-              ),
-              const Expanded(
-                child: CommunityContent(),
-              ),
-            ],
-          );
-        },
+                  onChanged: (val) {
+                    controller.updateSearch(val);
+                  },
+                );
+              }
+            ),
+          ),
+          const Expanded(
+            child: CommunityContent(),
+          ),
+        ],
       ),
       floatingActionButton: Container(
         width: 56,

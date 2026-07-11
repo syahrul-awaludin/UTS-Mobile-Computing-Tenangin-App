@@ -31,49 +31,64 @@ class _LearnViewState extends State<LearnView> {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
-      body: Consumer<LearnController>(
-        builder: (context, controller, _) {
-          return ListView(
+      body: Column(
+        children: [
+          Padding(
             padding: const EdgeInsets.all(16.0),
-            children: [
-              AppSearchBar(
-                controller: controller.searchController,
-                hintText: 'What do you want to learn?',
-                onChanged: controller.updateSearch,
-              ),
-              const SizedBox(height: 24),
-              TodayMeditationList(todayMeditations: controller.todayMeditations),
-              const SizedBox(height: 32),
-              SectionHeader(title: 'Mindset Course'),
-              const SizedBox(height: 16),
-              if (controller.filteredCourses.isEmpty)
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Center(
-                    child: Text(
-                      'No courses found.',
-                      style: AppTypography.body1Regular(color: AppColors.textCaption),
-                    ),
-                  ),
-                )
-              else
-                ...List.generate(controller.filteredCourses.length, (i) {
-                  final course = controller.filteredCourses[i];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
-                    child: CourseListItem(
-                      course: course,
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => LearnDetailView(course: course)),
-                      ),
-                    ),
-                  );
-                }),
-            ],
-          );
-        },
+            child: Builder(
+              builder: (context) {
+                final controller = context.read<LearnController>();
+                return AppSearchBar(
+                  controller: controller.searchController,
+                  hintText: 'What do you want to learn?',
+                  onChanged: (val) {
+                    controller.updateSearch(val);
+                  },
+                );
+              }
+            ),
+          ),
+          Expanded(
+            child: Consumer<LearnController>(
+              builder: (context, controller, _) {
+                return ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  children: [
+                    TodayMeditationList(todayMeditations: controller.todayMeditations),
+                    const SizedBox(height: 32),
+                    SectionHeader(title: 'Mindset Course'),
+                    const SizedBox(height: 16),
+                    if (controller.filteredCourses.isEmpty)
+                      Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Center(
+                          child: Text(
+                            'No courses found.',
+                            style: AppTypography.body1Regular(color: AppColors.textCaption),
+                          ),
+                        ),
+                      )
+                    else
+                      ...List.generate(controller.filteredCourses.length, (i) {
+                        final course = controller.filteredCourses[i];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 12.0),
+                          child: CourseListItem(
+                            course: course,
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LearnDetailView(course: course)),
+                            ),
+                          ),
+                        );
+                      }),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
