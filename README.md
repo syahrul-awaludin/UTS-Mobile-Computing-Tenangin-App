@@ -138,5 +138,10 @@ Berikut adalah pratinjau antarmuka pengguna (UI) dari aplikasi Tenangin:
   <img src="assets/screenshots/10-add_post.png" width="30%">
 </p>
 
+### 4. Notifikasi & Interaksi Real-time
+<p align="center">
+  <img src="assets/screenshots/11-notif.png" width="30%">
+</p>
+
 ---
 *Dibuat dan dirancang oleh Syahrul Awaludin untuk UAS Mobile Computing 2026*
