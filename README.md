@@ -53,7 +53,9 @@ lib/
  │   ├── auth_controller.dart
  │   └── community_controller.dart
  ├── models/             # Struktur data berorientasi objek (OOP) untuk mapping JSON API
- │   └── post_model.dart
+ │   ├── post_model.dart
+ │   ├── user_model.dart
+ │   └── comment_model.dart
  ├── services/           # Interaksi ke luar sistem (HTTP REST API, WebSocket & Notifikasi)
  │   ├── api_client.dart
  │   ├── socket_service.dart
