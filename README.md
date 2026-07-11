@@ -73,19 +73,20 @@ lib/
 ## 💻 Tech Stack & Dependencies
 
 **Sistem Keseluruhan:**
-- **Frontend (Mobile)**: Flutter (Dart)
-- **Backend (API)**: Node.js dengan framework Express.js
-- **Deployment**: Virtual Private Server (VPS) menggunakan OS Ubuntu & PM2 sebagai *process manager*.
+- **Frontend (Mobile)**: Flutter (Dart) — Framework UI tangguh dari Google untuk membangun aplikasi *multi-platform* (*Android, iOS, macOS, dll.*) secara *native* dengan satu basis kode (codebase).
+- **Backend (API)**: Node.js dengan framework Express.js — Digunakan untuk membuat arsitektur *RESTful API* dan *WebSocket server* secara *asynchronous* yang ringan dan cepat.
+- **Database Backend**: MySQL & Prisma ORM — Penyimpanan relasional yang solid, dikelola secara terstruktur dengan *schema-based* ORM Prisma.
+- **Deployment**: Virtual Private Server (VPS) menggunakan OS Ubuntu & PM2 sebagai *process manager* agar API tetap berjalan (uptime 24/7).
 
 **Library & Package Utama (Flutter):**
-- `provider`: Digunakan untuk *State Management*. Memisahkan logika pengelolaan *state* dari *widget tree*, serta me-*render* ulang UI secara spesifik hanya pada bagian yang berubah secara efisien.
-- `http`: Mengelola proses pengambilan data (*HTTP Client*) asinkronus dengan Backend REST API.
-- `shared_preferences`: Berperan sebagai **Local Storage** untuk menyimpan dan membaca data sederhana (seperti sesi `auth_token`).
-- `flutter_local_notifications`: Paket esensial untuk memunculkan notifikasi perangkat keras lokal (*Native Mobile Feature*).
-- `socket_io_client`: Mengelola koneksi WebSocket untuk fitur *real-time* (Pembaruan UI dan notifikasi instan dari *backend*).
-- `overlay_support`: Menampilkan *banner* notifikasi *in-app* (muncul dari bagian atas layar) saat aplikasi sedang dibuka.
-- `image_picker`: Memanfaatkan sensor perangkat (Kamera/Galeri lokal) untuk mengunggah gambar.
-- `video_player` / `youtube_player_iframe`: Pemutar media visual pendukung fitur *Learn*.
+- **`provider`**: Paket wajib untuk *State Management*. Memisahkan logika pengelolaan data (bisnis) dari *widget tree*, serta menyuruh Flutter untuk hanya me-*render* ulang UI pada bagian komponen yang nilainya berubah (*reactivity* yang efisien).
+- **`http`**: *Network library* bawaan yang ringan untuk mengelola proses pengambilan atau pengiriman data (*CRUD*) secara asinkronus dengan Backend REST API.
+- **`shared_preferences`**: Berperan sebagai **Local Storage** (mirip *cookie/localStorage* di web) untuk menyimpan data esensial yang persisten meskipun aplikasi ditutup (misalnya menyimpan sesi `auth_token` agar pengguna tidak perlu *login* setiap kali masuk).
+- **`flutter_local_notifications`**: Berfungsi untuk menjadwalkan dan memunculkan notifikasi *pop-up* standar berbasis sistem perangkat keras lokal (baik di Android/iOS/macOS) secara luring (*offline*) tanpa membutuhkan layanan *cloud messaging* seperti Firebase FCM.
+- **`socket_io_client`**: Sebuah *client socket* untuk membuka jalur komunikasi dua arah berkelanjutan (Full-Duplex) dengan *backend*. Digunakan untuk mendengarkan perubahan data (contohnya angka jumlah *Like/Comment* bertambah) dan menembak *event* baru langsung ke layar dalam sepersekian detik.
+- **`overlay_support`**: Ekstensi visual untuk merender notifikasi atau *snackbars* yang melayang (overlay) di urutan paling depan *widget tree*. Sangat berguna untuk membungkus *alert* notifikasi instan dari WebSocket agar terlihat menarik tanpa memedulikan di halaman mana pengguna sedang berada.
+- **`image_picker`**: Plugin resmi Flutter yang memanggil jendela *Native* sistem HP untuk memilih berkas foto dari Galeri lokal atau memicu kamera bawaan (berguna untuk fitur unggah foto profil, dsb.).
+- **`video_player` & `youtube_player_iframe`**: Modul pemutar media yang merender bingkai (frame) video langsung di dalam UI Flutter, yang mendukung fitur multimedia relaksasi di menu *Learn*.
 
 ---
 
