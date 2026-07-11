@@ -114,16 +114,29 @@ lib/
 
 ## 📱 Screenshot Aplikasi
 
-*(Screenshot aplikasi akan ditambahkan di sini)*
-<!-- Tambahkan URL gambar di bawah teks berikut -->
+Berikut adalah pratinjau antarmuka pengguna (UI) dari aplikasi Tenangin:
 
-- **Login Screen:** 
+### 1. Onboarding & Autentikasi
+<p align="center">
+  <img src="assets/screenshots/1-onboarding.png" width="30%">
+  <img src="assets/screenshots/2-login.png" width="30%">
+  <img src="assets/screenshots/3-register.png" width="30%">
+</p>
 
-- **Register Screen:** 
+### 2. Beranda & Eksplorasi Edukasi (Learn)
+<p align="center">
+  <img src="assets/screenshots/4-home.png" width="23%">
+  <img src="assets/screenshots/5-learn.png" width="23%">
+  <img src="assets/screenshots/6-course.png" width="23%">
+  <img src="assets/screenshots/7-course_detail.png" width="23%">
+</p>
 
-- **Home Screen:** 
-
-- **Community Screen:** 
+### 3. Komunitas (Ruang Aman)
+<p align="center">
+  <img src="assets/screenshots/8-community.png" width="30%">
+  <img src="assets/screenshots/9-post_detail.png" width="30%">
+  <img src="assets/screenshots/10-add_post.png" width="30%">
+</p>
 
 ---
 *Dibuat dan dirancang oleh Syahrul Awaludin untuk UAS Mobile Computing 2026*
