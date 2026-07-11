@@ -6,7 +6,7 @@ class NotificationController extends ChangeNotifier {
   final NotificationService _notificationService;
 
   NotificationController(this._notificationService);
-  
+
   List<NotificationModel> _notifications = [];
   bool _isLoading = false;
   String? _error;

@@ -57,7 +57,8 @@ class OnboardingView extends StatelessWidget {
                     onPressed: () => Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const RegisterView()),
+                        builder: (context) => const RegisterView(),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -77,7 +78,8 @@ class OnboardingView extends StatelessWidget {
                         onTap: () => Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoginView()),
+                            builder: (context) => const LoginView(),
+                          ),
                         ),
                         child: const Text(
                           'Sign In',

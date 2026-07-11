@@ -64,38 +64,68 @@ class _MainTabViewState extends State<MainTabView> {
           elevation: 0,
           items: [
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/home_default.svg',
-                  width: 24, height: 24),
-              activeIcon: SvgPicture.asset('assets/icons/home_active.svg',
-                  width: 24, height: 24),
+              icon: SvgPicture.asset(
+                'assets/icons/home_default.svg',
+                width: 24,
+                height: 24,
+              ),
+              activeIcon: SvgPicture.asset(
+                'assets/icons/home_active.svg',
+                width: 24,
+                height: 24,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/learn_default.svg',
-                  width: 24, height: 24),
-              activeIcon: SvgPicture.asset('assets/icons/learn_active.svg',
-                  width: 24, height: 24),
+              icon: SvgPicture.asset(
+                'assets/icons/learn_default.svg',
+                width: 24,
+                height: 24,
+              ),
+              activeIcon: SvgPicture.asset(
+                'assets/icons/learn_active.svg',
+                width: 24,
+                height: 24,
+              ),
               label: 'Learn',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/community_default.svg',
-                  width: 24, height: 24),
-              activeIcon: SvgPicture.asset('assets/icons/community_active.svg',
-                  width: 24, height: 24),
+              icon: SvgPicture.asset(
+                'assets/icons/community_default.svg',
+                width: 24,
+                height: 24,
+              ),
+              activeIcon: SvgPicture.asset(
+                'assets/icons/community_active.svg',
+                width: 24,
+                height: 24,
+              ),
               label: 'Community',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/consult_default.svg',
-                  width: 24, height: 24),
-              activeIcon: SvgPicture.asset('assets/icons/consult_active.svg',
-                  width: 24, height: 24),
+              icon: SvgPicture.asset(
+                'assets/icons/consult_default.svg',
+                width: 24,
+                height: 24,
+              ),
+              activeIcon: SvgPicture.asset(
+                'assets/icons/consult_active.svg',
+                width: 24,
+                height: 24,
+              ),
               label: 'Consult',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset('assets/icons/profile_default.svg',
-                  width: 24, height: 24),
-              activeIcon: SvgPicture.asset('assets/icons/profile_active.svg',
-                  width: 24, height: 24),
+              icon: SvgPicture.asset(
+                'assets/icons/profile_default.svg',
+                width: 24,
+                height: 24,
+              ),
+              activeIcon: SvgPicture.asset(
+                'assets/icons/profile_active.svg',
+                width: 24,
+                height: 24,
+              ),
               label: 'Profile',
             ),
           ],
@@ -131,8 +161,11 @@ class _PlaceholderView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.construction,
-                size: 64, color: AppColors.primary.withValues(alpha: 0.5)),
+            Icon(
+              Icons.construction,
+              size: 64,
+              color: AppColors.primary.withValues(alpha: 0.5),
+            ),
             const SizedBox(height: 16),
             Text(
               '$title coming soon',

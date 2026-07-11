@@ -37,13 +37,12 @@ class MoodCard extends StatelessWidget {
                   children: [
                     Text(
                       date,
-                      style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption).copyWith(fontSize: 12),
+                      style: AppTypography.smallDescriptionRegular(
+                        color: AppColors.textCaption,
+                      ).copyWith(fontSize: 12),
                     ),
                     const SizedBox(height: 6),
-                    Text(
-                      feeling,
-                      style: AppTypography.titleSemiBold(),
-                    ),
+                    Text(feeling, style: AppTypography.titleSemiBold()),
                   ],
                 ),
               ),
@@ -76,10 +75,6 @@ class MoodCard extends StatelessWidget {
         imagePath = 'assets/images/stress.png';
         break;
     }
-    return SizedBox(
-      width: 52,
-      height: 52,
-      child: Image.asset(imagePath),
-    );
+    return SizedBox(width: 52, height: 52, child: Image.asset(imagePath));
   }
 }

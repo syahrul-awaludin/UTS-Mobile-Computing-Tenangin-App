@@ -15,21 +15,25 @@ class LearnController extends ChangeNotifier {
   String get searchQuery => _searchQuery;
 
   List<CourseModel> get _allCourses => _learnService.fetchAllCourses();
-  
+
   List<CourseModel> get todayMeditations {
     final list = _learnService.fetchTodayMeditations();
     if (_searchQuery.isEmpty) return list;
     return list
-        .where((course) =>
-            course.title.toLowerCase().contains(_searchQuery.toLowerCase()))
+        .where(
+          (course) =>
+              course.title.toLowerCase().contains(_searchQuery.toLowerCase()),
+        )
         .toList();
   }
 
   List<CourseModel> get filteredCourses {
     if (_searchQuery.isEmpty) return _allCourses;
     return _allCourses
-        .where((course) =>
-            course.title.toLowerCase().contains(_searchQuery.toLowerCase()))
+        .where(
+          (course) =>
+              course.title.toLowerCase().contains(_searchQuery.toLowerCase()),
+        )
         .toList();
   }
 

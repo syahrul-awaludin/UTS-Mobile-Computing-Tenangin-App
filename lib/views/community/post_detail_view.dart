@@ -21,7 +21,7 @@ class PostDetailView extends StatefulWidget {
 class _PostDetailViewState extends State<PostDetailView> {
   final TextEditingController _commentController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
-  
+
   List<CommentModel> _comments = [];
   bool _isLoading = true;
   String? _errorMessage;
@@ -68,10 +68,14 @@ class _PostDetailViewState extends State<PostDetailView> {
         barrierDismissible: false,
         builder: (ctx) => const Center(child: CircularProgressIndicator()),
       );
-      
+
       final parentId = _replyingTo?.id;
-      await controller.addCommentToPost(widget.post.id, text, parentId: parentId);
-      
+      await controller.addCommentToPost(
+        widget.post.id,
+        text,
+        parentId: parentId,
+      );
+
       if (mounted) {
         Navigator.pop(context); // close loading
         _commentController.clear();
@@ -97,7 +101,15 @@ class _PostDetailViewState extends State<PostDetailView> {
       backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text('Post', style: TextStyle(fontFamily: 'Inter', color: AppColors.textHeading, fontSize: 18, fontWeight: FontWeight.w600)),
+        title: const Text(
+          'Post',
+          style: TextStyle(
+            fontFamily: 'Inter',
+            color: AppColors.textHeading,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
         centerTitle: true,
         elevation: 0,
         iconTheme: const IconThemeData(color: AppColors.textHeading),
@@ -115,7 +127,11 @@ class _PostDetailViewState extends State<PostDetailView> {
               child: ListView(
                 padding: const EdgeInsets.all(16),
                 children: [
-                  PostCard(post: widget.post, currentUserId: widget.currentUserId, isDetail: true),
+                  PostCard(
+                    post: widget.post,
+                    currentUserId: widget.currentUserId,
+                    isDetail: true,
+                  ),
                   const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.all(16),
@@ -126,26 +142,56 @@ class _PostDetailViewState extends State<PostDetailView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Comments', style: TextStyle(fontFamily: 'Inter', fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.textHeading)),
+                        const Text(
+                          'Comments',
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textHeading,
+                          ),
+                        ),
                         const SizedBox(height: 16),
                         if (_isLoading)
-                          const Center(child: Padding(padding: EdgeInsets.all(20), child: CircularProgressIndicator()))
+                          const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(20),
+                              child: CircularProgressIndicator(),
+                            ),
+                          )
                         else if (_errorMessage != null)
-                          Center(child: Text(_errorMessage!, style: const TextStyle(color: AppColors.moodStress)))
+                          Center(
+                            child: Text(
+                              _errorMessage!,
+                              style: const TextStyle(
+                                color: AppColors.moodStress,
+                              ),
+                            ),
+                          )
                         else if (_comments.isEmpty)
-                          const Center(child: Padding(padding: EdgeInsets.all(20), child: Text('No comments yet', style: TextStyle(color: AppColors.textCaption))))
+                          const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Text(
+                                'No comments yet',
+                                style: TextStyle(color: AppColors.textCaption),
+                              ),
+                            ),
+                          )
                         else
-                          ..._comments.map((comment) => CommentItem(
-                            comment: comment,
-                            currentUserId: widget.currentUserId,
-                            onReply: (replyTo) {
-                              setState(() {
-                                _replyingTo = replyTo;
-                              });
-                              _focusNode.requestFocus();
-                            },
-                            onRefresh: _fetchComments,
-                          )),
+                          ..._comments.map(
+                            (comment) => CommentItem(
+                              comment: comment,
+                              currentUserId: widget.currentUserId,
+                              onReply: (replyTo) {
+                                setState(() {
+                                  _replyingTo = replyTo;
+                                });
+                                _focusNode.requestFocus();
+                              },
+                              onRefresh: _fetchComments,
+                            ),
+                          ),
                       ],
                     ),
                   ),

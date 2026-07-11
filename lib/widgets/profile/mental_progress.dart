@@ -64,10 +64,7 @@ class MentalProgress extends StatelessWidget {
           Container(
             width: 10,
             height: 10,
-            decoration: BoxDecoration(
-              color: dotColor,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(color: dotColor, shape: BoxShape.circle),
           ),
           const SizedBox(width: 8),
           Text(
@@ -80,7 +77,11 @@ class MentalProgress extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          const Icon(Icons.keyboard_arrow_down, size: 16, color: AppColors.textHeading),
+          const Icon(
+            Icons.keyboard_arrow_down,
+            size: 16,
+            color: AppColors.textHeading,
+          ),
         ],
       ),
     );
@@ -92,7 +93,9 @@ class MentalProgress extends StatelessWidget {
       children: [
         Container(
           width: 12,
-          height: 140 * heightFactor > 0 ? 140 * heightFactor : 10, // Min height
+          height: 140 * heightFactor > 0
+              ? 140 * heightFactor
+              : 10, // Min height
           decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(100),

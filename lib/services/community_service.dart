@@ -9,17 +9,19 @@ class CommunityService {
       final data = json.decode(response.body);
       return data['data'];
     } else {
-      throw Exception('Failed to load posts. Status Code: ${response.statusCode}');
+      throw Exception(
+        'Failed to load posts. Status Code: ${response.statusCode}',
+      );
     }
   }
 
-  Future<Map<String, dynamic>> createPost(String subject, String content) async {
+  Future<Map<String, dynamic>> createPost(
+    String subject,
+    String content,
+  ) async {
     final response = await ApiClient.post(
       '/posts',
-      body: {
-        'subject': subject,
-        'content': content,
-      },
+      body: {'subject': subject, 'content': content},
     );
 
     final data = json.decode(response.body);
@@ -27,7 +29,9 @@ class CommunityService {
     if (response.statusCode == 201 || response.statusCode == 200) {
       return data['data'] ?? data;
     } else {
-      final message = data['error'] != null ? data['error']['message'] : data['message'] ?? 'Failed to create post';
+      final message = data['error'] != null
+          ? data['error']['message']
+          : data['message'] ?? 'Failed to create post';
       throw Exception(message);
     }
   }
@@ -39,7 +43,9 @@ class CommunityService {
       return true;
     } else {
       final data = json.decode(response.body);
-      final message = data['error'] != null ? data['error']['message'] : data['message'] ?? 'Failed to delete post';
+      final message = data['error'] != null
+          ? data['error']['message']
+          : data['message'] ?? 'Failed to delete post';
       throw Exception(message);
     }
   }
@@ -51,7 +57,9 @@ class CommunityService {
     if (response.statusCode == 200 || response.statusCode == 201) {
       return data['data']; // returns { isLiked: true/false, totalLikes: int }
     } else {
-      final message = data['error'] != null ? data['error']['message'] : data['message'] ?? 'Failed to toggle like';
+      final message = data['error'] != null
+          ? data['error']['message']
+          : data['message'] ?? 'Failed to toggle like';
       throw Exception(message);
     }
   }
@@ -67,10 +75,12 @@ class CommunityService {
     }
   }
 
-  Future<Map<String, dynamic>> addComment(String postId, String text, {String? parentId}) async {
-    final body = {
-      'text': text,
-    };
+  Future<Map<String, dynamic>> addComment(
+    String postId,
+    String text, {
+    String? parentId,
+  }) async {
+    final body = {'text': text};
     if (parentId != null) {
       body['parentId'] = parentId;
     }
@@ -85,31 +95,34 @@ class CommunityService {
     if (response.statusCode == 201 || response.statusCode == 200) {
       return data['data'] ?? data;
     } else {
-      final message = data['error'] != null ? data['error']['message'] : data['message'] ?? 'Failed to add comment';
+      final message = data['error'] != null
+          ? data['error']['message']
+          : data['message'] ?? 'Failed to add comment';
       throw Exception(message);
     }
   }
 
-  Future<Map<String, dynamic>> updatePost(String postId, String subject, String content, {String? mood}) async {
-    final body = {
-      'subject': subject,
-      'content': content,
-    };
+  Future<Map<String, dynamic>> updatePost(
+    String postId,
+    String subject,
+    String content, {
+    String? mood,
+  }) async {
+    final body = {'subject': subject, 'content': content};
     if (mood != null) {
       body['mood'] = mood;
     }
 
-    final response = await ApiClient.put(
-      '/posts/$postId',
-      body: body,
-    );
+    final response = await ApiClient.put('/posts/$postId', body: body);
 
     final data = json.decode(response.body);
 
     if (response.statusCode == 200) {
       return data['data'] ?? data;
     } else {
-      final message = data['error'] != null ? data['error']['message'] : data['message'] ?? 'Failed to update post';
+      final message = data['error'] != null
+          ? data['error']['message']
+          : data['message'] ?? 'Failed to update post';
       throw Exception(message);
     }
   }
@@ -121,12 +134,17 @@ class CommunityService {
       return true;
     } else {
       final data = json.decode(response.body);
-      final message = data['error'] != null ? data['error']['message'] : data['message'] ?? 'Failed to delete comment';
+      final message = data['error'] != null
+          ? data['error']['message']
+          : data['message'] ?? 'Failed to delete comment';
       throw Exception(message);
     }
   }
 
-  Future<Map<String, dynamic>> updateComment(String commentId, String text) async {
+  Future<Map<String, dynamic>> updateComment(
+    String commentId,
+    String text,
+  ) async {
     final response = await ApiClient.put(
       '/posts/comments/$commentId',
       body: {'text': text},
@@ -137,7 +155,9 @@ class CommunityService {
     if (response.statusCode == 200) {
       return data['data'] ?? data;
     } else {
-      final message = data['error'] != null ? data['error']['message'] : data['message'] ?? 'Failed to update comment';
+      final message = data['error'] != null
+          ? data['error']['message']
+          : data['message'] ?? 'Failed to update comment';
       throw Exception(message);
     }
   }

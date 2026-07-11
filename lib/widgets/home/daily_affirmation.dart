@@ -6,11 +6,7 @@ class DailyAffirmation extends StatelessWidget {
   final String quote;
   final VoidCallback? onShare;
 
-  const DailyAffirmation({
-    super.key,
-    required this.quote,
-    this.onShare,
-  });
+  const DailyAffirmation({super.key, required this.quote, this.onShare});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +25,9 @@ class DailyAffirmation extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0, vertical: 16.0),
+                  horizontal: 24.0,
+                  vertical: 16.0,
+                ),
                 child: Text(
                   quote,
                   textAlign: TextAlign.center,

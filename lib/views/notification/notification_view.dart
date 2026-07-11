@@ -32,7 +32,10 @@ class _NotificationViewState extends State<NotificationView> {
     if (index != -1) {
       await Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PostDetailView(post: communityController.posts[index])),
+        MaterialPageRoute(
+          builder: (context) =>
+              PostDetailView(post: communityController.posts[index]),
+        ),
       );
     } else {
       if (mounted) {
@@ -90,12 +93,14 @@ class _NotificationViewState extends State<NotificationView> {
             onRefresh: () => controller.loadNotifications(),
             child: ListView.separated(
               itemCount: controller.notifications.length,
-              separatorBuilder: (context, index) => const Divider(height: 1, color: Color(0xFFF3F4F6)),
+              separatorBuilder: (context, index) =>
+                  const Divider(height: 1, color: Color(0xFFF3F4F6)),
               itemBuilder: (context, index) {
                 final notification = controller.notifications[index];
                 return NotificationItem(
                   notification: notification,
-                  onTap: () => _navigateToPost(notification.postId, notification.id),
+                  onTap: () =>
+                      _navigateToPost(notification.postId, notification.id),
                 );
               },
             ),

@@ -51,7 +51,9 @@ class _HomeViewState extends State<HomeView> {
                 const SizedBox(height: 24),
                 MoodHistoryList(moodHistory: controller.moodHistory),
                 const SizedBox(height: 32),
-                PersonalityTestsSection(personalityTests: controller.personalityTests),
+                PersonalityTestsSection(
+                  personalityTests: controller.personalityTests,
+                ),
                 const SizedBox(height: 32),
                 SectionHeader(title: 'Daily Affirmation'),
                 const SizedBox(height: 16),
@@ -67,5 +69,4 @@ class _HomeViewState extends State<HomeView> {
       },
     );
   }
-
 }

@@ -16,8 +16,12 @@ class SettingsListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isDestructive ? const Color(0xFFEF4444) : const Color(0xFF1F2937);
-    final iconBgColor = isDestructive ? const Color(0xFFFEE2E2) : const Color(0xFFF3F4F6);
+    final color = isDestructive
+        ? const Color(0xFFEF4444)
+        : const Color(0xFF1F2937);
+    final iconBgColor = isDestructive
+        ? const Color(0xFFFEE2E2)
+        : const Color(0xFFF3F4F6);
 
     return InkWell(
       onTap: onTap ?? () {},

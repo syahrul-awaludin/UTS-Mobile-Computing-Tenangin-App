@@ -27,15 +27,23 @@ class FlowerCharacterPainter extends CustomPainter {
       final angle = (i * math.pi / points) - (math.pi / 2);
       final x = cx + r * math.cos(angle);
       final y = cy + r * math.sin(angle);
-      if (i == 0) { path.moveTo(x, y); } else { path.lineTo(x, y); }
+      if (i == 0) {
+        path.moveTo(x, y);
+      } else {
+        path.lineTo(x, y);
+      }
     }
     path.close();
     canvas.drawPath(path, paint);
   }
 
   void _drawFace(Canvas canvas, double cx, double cy, double faceRadius) {
-    final eyePaint = Paint()..color = Colors.white..style = PaintingStyle.fill;
-    final pupilPaint = Paint()..color = const Color(0xFF242528)..style = PaintingStyle.fill;
+    final eyePaint = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
+    final pupilPaint = Paint()
+      ..color = const Color(0xFF242528)
+      ..style = PaintingStyle.fill;
     final eyeY = cy - faceRadius * 0.15;
     final eyeSpacing = faceRadius * 0.45;
     final eyeR = faceRadius * 0.28;
@@ -43,28 +51,55 @@ class FlowerCharacterPainter extends CustomPainter {
     canvas.drawCircle(Offset(cx - eyeSpacing, eyeY), eyeR * 0.5, pupilPaint);
     canvas.drawCircle(Offset(cx + eyeSpacing, eyeY), eyeR, eyePaint);
     canvas.drawCircle(Offset(cx + eyeSpacing, eyeY), eyeR * 0.5, pupilPaint);
-    final smilePaint = Paint()..color = const Color(0xFF242528)..style = PaintingStyle.stroke..strokeWidth = 2.5..strokeCap = StrokeCap.round;
+    final smilePaint = Paint()
+      ..color = const Color(0xFF242528)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.5
+      ..strokeCap = StrokeCap.round;
     final smilePath = Path();
     final smileY = cy + faceRadius * 0.2;
     smilePath.moveTo(cx - faceRadius * 0.3, smileY);
-    smilePath.quadraticBezierTo(cx, smileY + faceRadius * 0.35, cx + faceRadius * 0.3, smileY);
+    smilePath.quadraticBezierTo(
+      cx,
+      smileY + faceRadius * 0.35,
+      cx + faceRadius * 0.3,
+      smileY,
+    );
     canvas.drawPath(smilePath, smilePaint);
   }
 
   void _drawArms(Canvas canvas, double cx, double cy, double radius) {
-    final paint = Paint()..color = const Color(0xFF242528)..style = PaintingStyle.stroke..strokeWidth = 3..strokeCap = StrokeCap.round;
+    final paint = Paint()
+      ..color = const Color(0xFF242528)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3
+      ..strokeCap = StrokeCap.round;
     final leftArmPath = Path()
       ..moveTo(cx - radius * 0.8, cy - radius * 0.2)
-      ..quadraticBezierTo(cx - radius * 1.2, cy - radius * 0.8, cx - radius * 1.0, cy - radius * 1.2);
+      ..quadraticBezierTo(
+        cx - radius * 1.2,
+        cy - radius * 0.8,
+        cx - radius * 1.0,
+        cy - radius * 1.2,
+      );
     canvas.drawPath(leftArmPath, paint);
     final rightArmPath = Path()
       ..moveTo(cx + radius * 0.8, cy - radius * 0.3)
-      ..quadraticBezierTo(cx + radius * 1.3, cy - radius * 0.9, cx + radius * 1.1, cy - radius * 1.3);
+      ..quadraticBezierTo(
+        cx + radius * 1.3,
+        cy - radius * 0.9,
+        cx + radius * 1.1,
+        cy - radius * 1.3,
+      );
     canvas.drawPath(rightArmPath, paint);
   }
 
   void _drawLegs(Canvas canvas, double cx, double cy, double radius) {
-    final paint = Paint()..color = const Color(0xFF242528)..style = PaintingStyle.stroke..strokeWidth = 3..strokeCap = StrokeCap.round;
+    final paint = Paint()
+      ..color = const Color(0xFF242528)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3
+      ..strokeCap = StrokeCap.round;
     final leftLegPath = Path()
       ..moveTo(cx - radius * 0.3, cy + radius * 0.8)
       ..lineTo(cx - radius * 0.5, cy + radius * 1.4)
@@ -96,8 +131,18 @@ class SquigglePainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
     final path = Path()
       ..moveTo(0, size.height * 0.5)
-      ..quadraticBezierTo(size.width * 0.25, 0, size.width * 0.5, size.height * 0.5)
-      ..quadraticBezierTo(size.width * 0.75, size.height, size.width, size.height * 0.5);
+      ..quadraticBezierTo(
+        size.width * 0.25,
+        0,
+        size.width * 0.5,
+        size.height * 0.5,
+      )
+      ..quadraticBezierTo(
+        size.width * 0.75,
+        size.height,
+        size.width,
+        size.height * 0.5,
+      );
     canvas.drawPath(path, paint);
   }
 
@@ -112,7 +157,9 @@ class SadBlobPainter extends CustomPainter {
     final cx = size.width * 0.5;
     final cy = size.height * 0.55;
     final r = size.width * 0.4;
-    final bodyPaint = Paint()..color = const Color(0xFF48BFE3)..style = PaintingStyle.fill;
+    final bodyPaint = Paint()
+      ..color = const Color(0xFF48BFE3)
+      ..style = PaintingStyle.fill;
     final path = Path();
     const bumps = 7;
     for (int i = 0; i <= bumps * 2; i++) {
@@ -131,13 +178,21 @@ class SadBlobPainter extends CustomPainter {
     }
     path.close();
     canvas.drawPath(path, bodyPaint);
-    final eyeWhite = Paint()..color = Colors.white..style = PaintingStyle.fill;
-    final pupil = Paint()..color = const Color(0xFF242528)..style = PaintingStyle.fill;
+    final eyeWhite = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
+    final pupil = Paint()
+      ..color = const Color(0xFF242528)
+      ..style = PaintingStyle.fill;
     canvas.drawCircle(Offset(cx - r * 0.3, cy - r * 0.2), r * 0.25, eyeWhite);
     canvas.drawCircle(Offset(cx - r * 0.25, cy - r * 0.3), r * 0.12, pupil);
     canvas.drawCircle(Offset(cx + r * 0.3, cy - r * 0.2), r * 0.25, eyeWhite);
     canvas.drawCircle(Offset(cx + r * 0.25, cy - r * 0.3), r * 0.12, pupil);
-    final mouthPaint = Paint()..color = const Color(0xFF242528)..style = PaintingStyle.stroke..strokeWidth = 3.5..strokeCap = StrokeCap.round;
+    final mouthPaint = Paint()
+      ..color = const Color(0xFF242528)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3.5
+      ..strokeCap = StrokeCap.round;
     final mouth = Path()
       ..moveTo(cx - r * 0.3, cy + r * 0.25)
       ..quadraticBezierTo(cx, cy - r * 0.05, cx + r * 0.3, cy + r * 0.25);
@@ -147,4 +202,3 @@ class SadBlobPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
-

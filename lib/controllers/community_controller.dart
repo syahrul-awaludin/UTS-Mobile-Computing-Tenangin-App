@@ -26,13 +26,16 @@ class CommunityController extends ChangeNotifier {
     List<PostModel> result = _posts;
     if (_searchQuery.isNotEmpty) {
       result = result
-          .where((post) => post.subject.toLowerCase().contains(_searchQuery.toLowerCase()))
+          .where(
+            (post) =>
+                post.subject.toLowerCase().contains(_searchQuery.toLowerCase()),
+          )
           .toList();
     }
-    
+
     // Create a copy to sort
     result = List.from(result);
-    
+
     if (_filterType == 'terbaru') {
       result.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     } else if (_filterType == 'terlama') {
@@ -48,7 +51,7 @@ class CommunityController extends ChangeNotifier {
         return scoreB.compareTo(scoreA);
       });
     }
-    
+
     return result;
   }
 
@@ -65,7 +68,9 @@ class CommunityController extends ChangeNotifier {
 
   CommunityController(this._communityService, this._socketService) {
     fetchPosts();
-    _postUpdateSubscription = _socketService.onPostUpdated.listen(_handlePostUpdate);
+    _postUpdateSubscription = _socketService.onPostUpdated.listen(
+      _handlePostUpdate,
+    );
   }
 
   void _handlePostUpdate(Map<String, dynamic> data) {
@@ -88,7 +93,7 @@ class CommunityController extends ChangeNotifier {
         likeCount: newLikeCount,
         commentCount: newCommentCount,
       );
-      
+
       notifyListeners();
     }
   }
@@ -101,7 +106,7 @@ class CommunityController extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('auth_token');
-      
+
       if (token == null) {
         throw Exception('Please login to view posts');
       }
@@ -133,16 +138,16 @@ class CommunityController extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('auth_token');
-      
+
       if (token == null) {
         throw Exception('Please login to create a post');
       }
 
       final newPostJson = await _communityService.createPost(subject, content);
       final newPost = PostModel.fromJson(newPostJson);
-      
+
       _posts.insert(0, newPost);
-      
+
       // Reset controllers
       postSubjectController.clear();
       postContentController.clear();
@@ -150,11 +155,12 @@ class CommunityController extends ChangeNotifier {
       if (context.mounted) {
         Navigator.pop(context);
       }
-      
     } catch (e) {
       if (context.mounted) {
         final errorMessage = e.toString().replaceFirst('Exception: ', '');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMessage)));
       }
     } finally {
       _isLoading = false;
@@ -169,7 +175,7 @@ class CommunityController extends ChangeNotifier {
     try {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('auth_token');
-      
+
       if (token == null) {
         throw Exception('Please login to delete a post');
       }
@@ -180,7 +186,9 @@ class CommunityController extends ChangeNotifier {
     } catch (e) {
       if (context.mounted) {
         final errorMessage = e.toString().replaceFirst('Exception: ', '');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMessage)));
       }
       return false;
     } finally {
@@ -223,7 +231,7 @@ class CommunityController extends ChangeNotifier {
       }
 
       final result = await _communityService.toggleLike(postId);
-      
+
       // Update with exact numbers from server
       if (postIndex != -1) {
         final currentPost = _posts[postIndex];
@@ -245,7 +253,9 @@ class CommunityController extends ChangeNotifier {
     } catch (e) {
       if (context.mounted) {
         final errorMessage = e.toString().replaceFirst('Exception: ', '');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMessage)));
       }
       // Revert in case of failure
       fetchPosts();
@@ -264,14 +274,22 @@ class CommunityController extends ChangeNotifier {
     }
   }
 
-  Future<Map<String, dynamic>> addCommentToPost(String postId, String text, {String? parentId}) async {
+  Future<Map<String, dynamic>> addCommentToPost(
+    String postId,
+    String text, {
+    String? parentId,
+  }) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('auth_token');
       if (token == null) throw Exception('Silakan login');
 
-      final result = await _communityService.addComment(postId, text, parentId: parentId);
-      
+      final result = await _communityService.addComment(
+        postId,
+        text,
+        parentId: parentId,
+      );
+
       // Update comment count locally
       final postIndex = _posts.indexWhere((p) => p.id == postId);
       if (postIndex != -1) {
@@ -298,7 +316,13 @@ class CommunityController extends ChangeNotifier {
     }
   }
 
-  Future<bool> updatePost(String postId, String subject, String content, BuildContext context, {String? mood}) async {
+  Future<bool> updatePost(
+    String postId,
+    String subject,
+    String content,
+    BuildContext context, {
+    String? mood,
+  }) async {
     _isLoading = true;
     notifyListeners();
     try {
@@ -306,7 +330,12 @@ class CommunityController extends ChangeNotifier {
       final token = prefs.getString('auth_token');
       if (token == null) throw Exception('Please login');
 
-      final updatedPostJson = await _communityService.updatePost(postId, subject, content, mood: mood);
+      final updatedPostJson = await _communityService.updatePost(
+        postId,
+        subject,
+        content,
+        mood: mood,
+      );
       final updatedPost = PostModel.fromJson(updatedPostJson);
 
       final index = _posts.indexWhere((p) => p.id == postId);
@@ -329,7 +358,9 @@ class CommunityController extends ChangeNotifier {
     } catch (e) {
       if (context.mounted) {
         final errorMessage = e.toString().replaceFirst('Exception: ', '');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMessage)));
       }
       return false;
     } finally {
@@ -349,13 +380,19 @@ class CommunityController extends ChangeNotifier {
     } catch (e) {
       if (context.mounted) {
         final errorMessage = e.toString().replaceFirst('Exception: ', '');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMessage)));
       }
       return false;
     }
   }
 
-  Future<bool> updateComment(String commentId, String text, BuildContext context) async {
+  Future<bool> updateComment(
+    String commentId,
+    String text,
+    BuildContext context,
+  ) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('auth_token');
@@ -366,7 +403,9 @@ class CommunityController extends ChangeNotifier {
     } catch (e) {
       if (context.mounted) {
         final errorMessage = e.toString().replaceFirst('Exception: ', '');
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(errorMessage)));
       }
       return false;
     }

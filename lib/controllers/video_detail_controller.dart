@@ -7,7 +7,7 @@ class VideoDetailController extends ChangeNotifier {
   VideoPlayerController? _videoPlayerController;
   ChewieController? _chewieController;
   final _yt = YoutubeExplode();
-  
+
   bool _isLoading = true;
   String? _errorMessage;
   String? _videoTitle;
@@ -65,4 +65,3 @@ class VideoDetailController extends ChangeNotifier {
     super.dispose();
   }
 }
-

@@ -40,13 +40,27 @@ class CommentInput extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 8),
               child: Row(
                 children: [
-                  Text('Replying to ', style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption).copyWith(fontSize: 12)),
-                  Text(replyingTo!.author.name, style: AppTypography.smallDescriptionSemiBold(color: AppColors.primary).copyWith(fontSize: 12)),
+                  Text(
+                    'Replying to ',
+                    style: AppTypography.smallDescriptionRegular(
+                      color: AppColors.textCaption,
+                    ).copyWith(fontSize: 12),
+                  ),
+                  Text(
+                    replyingTo!.author.name,
+                    style: AppTypography.smallDescriptionSemiBold(
+                      color: AppColors.primary,
+                    ).copyWith(fontSize: 12),
+                  ),
                   const Spacer(),
                   GestureDetector(
                     onTap: onCancelReply,
-                    child: const Icon(Icons.close, size: 16, color: AppColors.textCaption),
-                  )
+                    child: const Icon(
+                      Icons.close,
+                      size: 16,
+                      color: AppColors.textCaption,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -59,17 +73,26 @@ class CommentInput extends StatelessWidget {
                   style: AppTypography.body1Regular(),
                   decoration: InputDecoration(
                     hintText: 'Write a comment...',
-                    hintStyle: AppTypography.body1Regular(color: AppColors.textCaption),
+                    hintStyle: AppTypography.body1Regular(
+                      color: AppColors.textCaption,
+                    ),
                     filled: true,
                     fillColor: AppColors.background,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: AppColors.borderDefault),
+                      borderSide: const BorderSide(
+                        color: AppColors.borderDefault,
+                      ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24),
-                      borderSide: const BorderSide(color: AppColors.borderDefault),
+                      borderSide: const BorderSide(
+                        color: AppColors.borderDefault,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24),

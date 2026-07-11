@@ -4,10 +4,7 @@ import '../../theme/app_colors.dart';
 class ContentDetailView extends StatelessWidget {
   final String title;
 
-  const ContentDetailView({
-    super.key,
-    this.title = 'Taking Out of Stress',
-  });
+  const ContentDetailView({super.key, this.title = 'Taking Out of Stress'});
 
   @override
   Widget build(BuildContext context) {
@@ -62,16 +59,22 @@ class ContentDetailView extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: const [
-                            Text('00:00',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500)),
-                            Text('15:40',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w500)),
+                            Text(
+                              '00:00',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              '15:40',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 12),
@@ -130,8 +133,11 @@ class ContentDetailView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 16),
-                const Icon(Icons.favorite_border,
-                    color: AppColors.textHeading, size: 28),
+                const Icon(
+                  Icons.favorite_border,
+                  color: AppColors.textHeading,
+                  size: 28,
+                ),
               ],
             ),
             const SizedBox(height: 32),

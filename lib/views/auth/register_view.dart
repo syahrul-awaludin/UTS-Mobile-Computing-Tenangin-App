@@ -8,7 +8,6 @@ import '../../widgets/common/app_primary_button.dart';
 import '../../widgets/common/social_login_button.dart';
 import 'login_view.dart';
 
-
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});
 
@@ -55,7 +54,9 @@ class RegisterView extends StatelessWidget {
                           const SizedBox(height: 8),
                           Text(
                             'Sign up to get started with Tenangin.',
-                            style: AppTypography.body2Regular(color: AppColors.textCaption),
+                            style: AppTypography.body2Regular(
+                              color: AppColors.textCaption,
+                            ),
                           ),
                           const SizedBox(height: 32),
 
@@ -79,7 +80,8 @@ class RegisterView extends StatelessWidget {
 
                           // Password Input
                           AuthInputField(
-                            controller: authController.registerPasswordController,
+                            controller:
+                                authController.registerPasswordController,
                             icon: Icons.lock_outline,
                             hint: 'Password',
                             obscure: authController.obscurePassword,
@@ -96,23 +98,27 @@ class RegisterView extends StatelessWidget {
                           const SizedBox(height: 32),
 
                           // Sign Up Button
-                          authController.isLoading 
-                            ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
-                            : AppPrimaryButton(
-                            label: 'Sign Up',
-                            onPressed: () => authController.register(context),
-                          ),
+                          authController.isLoading
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.primary,
+                                  ),
+                                )
+                              : AppPrimaryButton(
+                                  label: 'Sign Up',
+                                  onPressed: () =>
+                                      authController.register(context),
+                                ),
                           const SizedBox(height: 48),
 
                           // Or sign in with divider
                           Row(
                             children: [
                               Expanded(
-                                  child: Divider(
-                                      color: AppColors.borderDefault)),
+                                child: Divider(color: AppColors.borderDefault),
+                              ),
                               const Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 16),
+                                padding: EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
                                   'Or sign up with',
                                   style: TextStyle(
@@ -122,8 +128,8 @@ class RegisterView extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                  child: Divider(
-                                      color: AppColors.borderDefault)),
+                                child: Divider(color: AppColors.borderDefault),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 24),
@@ -133,13 +139,16 @@ class RegisterView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SocialLoginButton(
-                                  assetPath: 'assets/icons/google.svg'),
+                                assetPath: 'assets/icons/google.svg',
+                              ),
                               const SizedBox(width: 16),
                               SocialLoginButton(
-                                  assetPath: 'assets/icons/apple.svg'),
+                                assetPath: 'assets/icons/apple.svg',
+                              ),
                               const SizedBox(width: 16),
                               SocialLoginButton(
-                                  assetPath: 'assets/icons/facebook.svg'),
+                                assetPath: 'assets/icons/facebook.svg',
+                              ),
                             ],
                           ),
                           const SizedBox(height: 48),
@@ -191,5 +200,4 @@ class RegisterView extends StatelessWidget {
       ),
     );
   }
-
 }

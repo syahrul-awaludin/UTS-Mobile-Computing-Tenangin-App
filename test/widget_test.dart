@@ -9,7 +9,7 @@ void main() {
     // Wait for splash screen to disappear
     await tester.pump(const Duration(seconds: 2));
     await tester.pumpAndSettle();
-    
+
     // Test passes if it builds without throwing exceptions
     expect(true, isTrue);
   });

@@ -31,7 +31,11 @@ class WelcomeBanner extends StatelessWidget {
               Positioned(
                 right: -20,
                 top: -20,
-                child: Icon(Icons.star, size: 120, color: Colors.white.withValues(alpha: 0.1)),
+                child: Icon(
+                  Icons.star,
+                  size: 120,
+                  color: Colors.white.withValues(alpha: 0.1),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),

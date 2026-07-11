@@ -40,7 +40,6 @@ class LoginView extends StatelessWidget {
                   child: Consumer<AuthController>(
                     builder: (context, authController, _) {
                       return Column(
-
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -50,7 +49,9 @@ class LoginView extends StatelessWidget {
                           const SizedBox(height: 8),
                           Text(
                             'Sign in to continue your journey with Tenangin.',
-                            style: AppTypography.body2Regular(color: AppColors.textCaption),
+                            style: AppTypography.body2Regular(
+                              color: AppColors.textCaption,
+                            ),
                           ),
                           const SizedBox(height: 32),
 
@@ -96,8 +97,9 @@ class LoginView extends StatelessWidget {
                                         onChanged:
                                             authController.toggleRememberMe,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
+                                          borderRadius: BorderRadius.circular(
+                                            4,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -106,8 +108,9 @@ class LoginView extends StatelessWidget {
                                       child: Text(
                                         'Remember me',
                                         style: TextStyle(
-                                            fontSize: 13,
-                                            color: AppColors.textHeading),
+                                          fontSize: 13,
+                                          color: AppColors.textHeading,
+                                        ),
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                     ),
@@ -127,23 +130,27 @@ class LoginView extends StatelessWidget {
                           const SizedBox(height: 32),
 
                           // Sign In Button
-                          authController.isLoading 
-                            ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
-                            : AppPrimaryButton(
-                            label: 'Sign In',
-                            onPressed: () => authController.login(context),
-                          ),
+                          authController.isLoading
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.primary,
+                                  ),
+                                )
+                              : AppPrimaryButton(
+                                  label: 'Sign In',
+                                  onPressed: () =>
+                                      authController.login(context),
+                                ),
                           const SizedBox(height: 48),
 
                           // Or sign in with divider
                           Row(
                             children: [
                               Expanded(
-                                  child: Divider(
-                                      color: AppColors.borderDefault)),
+                                child: Divider(color: AppColors.borderDefault),
+                              ),
                               const Padding(
-                                padding:
-                                    EdgeInsets.symmetric(horizontal: 16),
+                                padding: EdgeInsets.symmetric(horizontal: 16),
                                 child: Text(
                                   'Or sign in with',
                                   style: TextStyle(
@@ -153,8 +160,8 @@ class LoginView extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                  child: Divider(
-                                      color: AppColors.borderDefault)),
+                                child: Divider(color: AppColors.borderDefault),
+                              ),
                             ],
                           ),
                           const SizedBox(height: 24),
@@ -164,13 +171,16 @@ class LoginView extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SocialLoginButton(
-                                  assetPath: 'assets/icons/google.svg'),
+                                assetPath: 'assets/icons/google.svg',
+                              ),
                               const SizedBox(width: 16),
                               SocialLoginButton(
-                                  assetPath: 'assets/icons/apple.svg'),
+                                assetPath: 'assets/icons/apple.svg',
+                              ),
                               const SizedBox(width: 16),
                               SocialLoginButton(
-                                  assetPath: 'assets/icons/facebook.svg'),
+                                assetPath: 'assets/icons/facebook.svg',
+                              ),
                             ],
                           ),
                           const SizedBox(height: 48),
@@ -193,7 +203,8 @@ class LoginView extends StatelessWidget {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const RegisterView(),
+                                        builder: (context) =>
+                                            const RegisterView(),
                                       ),
                                     );
                                   },
@@ -222,5 +233,4 @@ class LoginView extends StatelessWidget {
       ),
     );
   }
-
 }

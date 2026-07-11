@@ -46,31 +46,45 @@ class TenanginApp extends StatelessWidget {
         // Controllers
         ChangeNotifierProxyProvider<AuthService, AuthController>(
           create: (context) => AuthController(context.read<AuthService>()),
-          update: (context, authService, previous) => previous ?? AuthController(authService),
+          update: (context, authService, previous) =>
+              previous ?? AuthController(authService),
         ),
         ChangeNotifierProxyProvider<HomeService, HomeController>(
           create: (context) => HomeController(context.read<HomeService>()),
-          update: (context, homeService, previous) => previous ?? HomeController(homeService),
+          update: (context, homeService, previous) =>
+              previous ?? HomeController(homeService),
         ),
         ChangeNotifierProxyProvider<LearnService, LearnController>(
           create: (context) => LearnController(context.read<LearnService>()),
-          update: (context, learnService, previous) => previous ?? LearnController(learnService),
+          update: (context, learnService, previous) =>
+              previous ?? LearnController(learnService),
         ),
-        ChangeNotifierProxyProvider2<CommunityService, SocketService, CommunityController>(
+        ChangeNotifierProxyProvider2<
+          CommunityService,
+          SocketService,
+          CommunityController
+        >(
           create: (context) => CommunityController(
-            context.read<CommunityService>(), 
+            context.read<CommunityService>(),
             context.read<SocketService>(),
           ),
-          update: (context, communityService, socketService, previous) => 
-            previous ?? CommunityController(communityService, socketService),
+          update: (context, communityService, socketService, previous) =>
+              previous ?? CommunityController(communityService, socketService),
         ),
         ChangeNotifierProxyProvider<ProfileService, ProfileController>(
-          create: (context) => ProfileController(context.read<ProfileService>()),
-          update: (context, profileService, previous) => previous ?? ProfileController(profileService),
+          create: (context) =>
+              ProfileController(context.read<ProfileService>()),
+          update: (context, profileService, previous) =>
+              previous ?? ProfileController(profileService),
         ),
-        ChangeNotifierProxyProvider<NotificationService, NotificationController>(
-          create: (context) => NotificationController(context.read<NotificationService>()),
-          update: (context, notificationService, previous) => previous ?? NotificationController(notificationService),
+        ChangeNotifierProxyProvider<
+          NotificationService,
+          NotificationController
+        >(
+          create: (context) =>
+              NotificationController(context.read<NotificationService>()),
+          update: (context, notificationService, previous) =>
+              previous ?? NotificationController(notificationService),
         ),
       ],
       child: OverlaySupport.global(
@@ -84,4 +98,3 @@ class TenanginApp extends StatelessWidget {
     );
   }
 }
-

@@ -32,17 +32,18 @@ class AvatarSection extends StatelessWidget {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: const Icon(Icons.camera_alt, size: 16, color: AppColors.primary),
+                  child: const Icon(
+                    Icons.camera_alt,
+                    size: 16,
+                    color: AppColors.primary,
+                  ),
                 ),
               ),
             ],
           ),
         ),
         const SizedBox(height: 16),
-        Text(
-          userName,
-          style: AppTypography.subHeadingSemiBold(),
-        ),
+        Text(userName, style: AppTypography.subHeadingSemiBold()),
       ],
     );
   }

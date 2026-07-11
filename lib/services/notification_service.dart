@@ -8,16 +8,17 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
 
   static Future<void> initLocalNotifications() async {
-    const initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    
+    const initializationSettingsAndroid = AndroidInitializationSettings(
+      '@mipmap/ic_launcher',
+    );
+
     // Konfigurasi untuk iOS dan macOS
     const initializationSettingsDarwin = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
-    
+
     const initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: initializationSettingsDarwin,
@@ -27,7 +28,11 @@ class NotificationService {
     await _notificationsPlugin.initialize(settings: initializationSettings);
   }
 
-  Future<void> showNotification({required int id, required String title, required String body}) async {
+  Future<void> showNotification({
+    required int id,
+    required String title,
+    required String body,
+  }) async {
     const androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'tenangin_channel',
       'Tenangin Notifications',
@@ -35,7 +40,7 @@ class NotificationService {
       priority: Priority.high,
       showWhen: false,
     );
-    
+
     const darwinPlatformChannelSpecifics = DarwinNotificationDetails();
 
     const platformChannelSpecifics = NotificationDetails(

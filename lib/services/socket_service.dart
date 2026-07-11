@@ -7,10 +7,12 @@ import '../theme/app_colors.dart';
 
 class SocketService with ChangeNotifier {
   io.Socket? _socket;
-  
+
   // Stream untuk meng-handle update dari socket secara global
-  final _postUpdateController = StreamController<Map<String, dynamic>>.broadcast();
-  Stream<Map<String, dynamic>> get onPostUpdated => _postUpdateController.stream;
+  final _postUpdateController =
+      StreamController<Map<String, dynamic>>.broadcast();
+  Stream<Map<String, dynamic>> get onPostUpdated =>
+      _postUpdateController.stream;
 
   // Sambungkan ke server WebSocket
   Future<void> connectAndListen() async {
@@ -24,7 +26,7 @@ class SocketService with ChangeNotifier {
     _socket = io.io('https://tenangin.syahrulawaludin.my.id', <String, dynamic>{
       'transports': ['websocket'],
       'autoConnect': false,
-      'auth': {'token': token}
+      'auth': {'token': token},
     });
 
     _socket!.connect();
@@ -39,7 +41,7 @@ class SocketService with ChangeNotifier {
       if (data != null) {
         String title = data['title'] ?? 'Notifikasi Baru';
         String body = data['body'] ?? '';
-        
+
         // Memunculkan In-App Notification Overlay di bagian atas (menggunakan overlay_support)
         showSimpleNotification(
           Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),

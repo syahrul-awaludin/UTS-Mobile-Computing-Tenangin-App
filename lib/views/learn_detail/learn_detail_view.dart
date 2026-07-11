@@ -10,10 +10,7 @@ import '../video_detail/video_detail_view.dart';
 class LearnDetailView extends StatelessWidget {
   final CourseModel course;
 
-  const LearnDetailView({
-    super.key,
-    required this.course,
-  });
+  const LearnDetailView({super.key, required this.course});
 
   static const List<CourseModel> _courses = [
     CourseModel(
@@ -77,11 +74,17 @@ class LearnDetailView extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () => Navigator.pop(context),
-                          child: const Icon(Icons.arrow_back,
-                              color: Colors.white, size: 24),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 24,
+                          ),
                         ),
-                        const Icon(Icons.more_vert,
-                            color: Colors.white, size: 24),
+                        const Icon(
+                          Icons.more_vert,
+                          color: Colors.white,
+                          size: 24,
+                        ),
                       ],
                     ),
                   ),
@@ -106,12 +109,17 @@ class LearnDetailView extends StatelessWidget {
             child: Container(
               decoration: const BoxDecoration(
                 color: AppColors.background,
-                borderRadius:
-                    BorderRadius.vertical(top: Radius.elliptical(200, 40)),
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.elliptical(200, 40),
+                ),
               ),
               child: ListView(
                 padding: const EdgeInsets.only(
-                    top: 40, left: 16, right: 16, bottom: 24),
+                  top: 40,
+                  left: 16,
+                  right: 16,
+                  bottom: 24,
+                ),
                 children: [
                   Text(
                     course.title,
@@ -122,11 +130,12 @@ class LearnDetailView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TagChip(
-                          icon: Icons.access_time, label: course.duration),
+                      TagChip(icon: Icons.access_time, label: course.duration),
                       const SizedBox(width: 12),
                       const TagChip(
-                          icon: Icons.play_circle_outline, label: 'meditation'),
+                        icon: Icons.play_circle_outline,
+                        label: 'meditation',
+                      ),
                     ],
                   ),
                   const SizedBox(height: 24),
@@ -139,35 +148,35 @@ class LearnDetailView extends StatelessWidget {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => VideoDetailView(
-                              fallbackTitle: course.title,
-                              videoId: course.youtubeVideoId,
-                            ),
+                          builder: (context) => VideoDetailView(
+                            fallbackTitle: course.title,
+                            videoId: course.youtubeVideoId,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   const SizedBox(height: 40),
-                  Text(
-                    'Mindset Course',
-                    style: AppTypography.titleSemiBold(),
-                  ),
+                  Text('Mindset Course', style: AppTypography.titleSemiBold()),
                   const SizedBox(height: 16),
-                  ...List.generate(_courses.length, (i) => Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
-                    child: CourseListItem(
-                      course: _courses[i],
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
+                  ...List.generate(
+                    _courses.length,
+                    (i) => Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: CourseListItem(
+                        course: _courses[i],
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
                             builder: (context) => VideoDetailView(
                               fallbackTitle: _courses[i].title,
                               videoId: _courses[i].youtubeVideoId,
                             ),
+                          ),
                         ),
                       ),
                     ),
-                  )),
+                  ),
                 ],
               ),
             ),
@@ -176,5 +185,4 @@ class LearnDetailView extends StatelessWidget {
       ),
     );
   }
-
 }

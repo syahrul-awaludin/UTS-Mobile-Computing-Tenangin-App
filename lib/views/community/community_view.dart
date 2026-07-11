@@ -17,10 +17,7 @@ class CommunityView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: Text(
-          'Community',
-          style: AppTypography.headlineH1Bold(),
-        ),
+        title: Text('Community', style: AppTypography.headlineH1Bold()),
         actions: [
           const NotificationBadge(),
           Builder(
@@ -50,12 +47,10 @@ class CommunityView extends StatelessWidget {
                     controller.updateSearch(val);
                   },
                 );
-              }
+              },
             ),
           ),
-          const Expanded(
-            child: CommunityContent(),
-          ),
+          const Expanded(child: CommunityContent()),
         ],
       ),
       floatingActionButton: Container(
@@ -90,5 +85,4 @@ class CommunityView extends StatelessWidget {
       ),
     );
   }
-
 }

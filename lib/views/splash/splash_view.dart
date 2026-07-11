@@ -25,9 +25,10 @@ class _SplashViewState extends State<SplashView>
       vsync: this,
       duration: const Duration(milliseconds: 800),
     );
-    _fadeAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
-    );
+    _fadeAnimation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
 
     Future.delayed(const Duration(milliseconds: 600), () {
       if (mounted) {
@@ -42,12 +43,12 @@ class _SplashViewState extends State<SplashView>
   Future<void> _checkAuthAndNavigate() async {
     // Wait for the splash animation to show
     await Future.delayed(const Duration(milliseconds: 2500));
-    
+
     if (!mounted) return;
-    
+
     final authController = context.read<AuthController>();
     final isLoggedIn = await authController.checkLoginStatus();
-    
+
     if (mounted) {
       Navigator.pushReplacement(
         context,
@@ -67,7 +68,6 @@ class _SplashViewState extends State<SplashView>
     _controller.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {

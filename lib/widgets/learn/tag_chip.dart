@@ -5,11 +5,7 @@ class TagChip extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  const TagChip({
-    super.key,
-    required this.icon,
-    required this.label,
-  });
+  const TagChip({super.key, required this.icon, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +21,10 @@ class TagChip extends StatelessWidget {
         children: [
           Icon(icon, size: 16, color: AppColors.textHeading),
           const SizedBox(width: 6),
-          Text(label,
-              style: const TextStyle(
-                  fontSize: 14, color: AppColors.textHeading)),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 14, color: AppColors.textHeading),
+          ),
         ],
       ),
     );

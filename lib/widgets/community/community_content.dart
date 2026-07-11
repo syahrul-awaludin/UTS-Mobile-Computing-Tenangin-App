@@ -24,7 +24,11 @@ class CommunityContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(Icons.error_outline, size: 48, color: AppColors.textCaption),
+            const Icon(
+              Icons.error_outline,
+              size: 48,
+              color: AppColors.textCaption,
+            ),
             const SizedBox(height: 16),
             Text(
               controller.errorMessage!,

@@ -60,10 +60,16 @@ class AchievementSection extends StatelessWidget {
                     value: progress,
                     strokeWidth: 4,
                     backgroundColor: Colors.grey[300],
-                    valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+                    valueColor: const AlwaysStoppedAnimation<Color>(
+                      AppColors.primary,
+                    ),
                   ),
                 ),
-                Icon(Icons.star, size: 16, color: progress == 1.0 ? AppColors.primary : Colors.grey[400]),
+                Icon(
+                  Icons.star,
+                  size: 16,
+                  color: progress == 1.0 ? AppColors.primary : Colors.grey[400],
+                ),
               ],
             ),
           ),

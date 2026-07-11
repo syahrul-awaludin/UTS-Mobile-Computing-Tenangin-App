@@ -16,7 +16,7 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     final id = json['id'] ?? '';
     final name = json['name'] ?? 'Anonymous';
-    
+
     // Generate a pseudo-random color based on user name length for consistency
     final colors = [
       const Color(0xFFB8E6D0),

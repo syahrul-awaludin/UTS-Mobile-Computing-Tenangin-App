@@ -66,7 +66,12 @@ class GreetingBanner extends StatelessWidget {
           // Content
           // Content
           Padding(
-            padding: const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0, right: 120.0),
+            padding: const EdgeInsets.only(
+              left: 20.0,
+              top: 20.0,
+              bottom: 20.0,
+              right: 120.0,
+            ),
             child: SizedBox(
               width: double.infinity,
               child: Column(

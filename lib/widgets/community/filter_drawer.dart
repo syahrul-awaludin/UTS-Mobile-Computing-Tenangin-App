@@ -63,14 +63,19 @@ class FilterDrawer extends StatelessWidget {
   }) {
     final isSelected = controller.filterType == value;
     return ListTile(
-      leading: Icon(icon, color: isSelected ? AppColors.primary : AppColors.textCaption),
+      leading: Icon(
+        icon,
+        color: isSelected ? AppColors.primary : AppColors.textCaption,
+      ),
       title: Text(
         title,
         style: isSelected
             ? AppTypography.body1SemiBold(color: AppColors.primary)
             : AppTypography.body1Regular(color: AppColors.textHeading),
       ),
-      trailing: isSelected ? const Icon(Icons.check, color: AppColors.primary) : null,
+      trailing: isSelected
+          ? const Icon(Icons.check, color: AppColors.primary)
+          : null,
       onTap: () {
         controller.setFilterType(value);
         Navigator.pop(context);

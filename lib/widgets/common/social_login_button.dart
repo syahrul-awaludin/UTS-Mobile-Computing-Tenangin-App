@@ -7,11 +7,7 @@ class SocialLoginButton extends StatelessWidget {
   final String assetPath;
   final VoidCallback? onTap;
 
-  const SocialLoginButton({
-    super.key,
-    required this.assetPath,
-    this.onTap,
-  });
+  const SocialLoginButton({super.key, required this.assetPath, this.onTap});
 
   @override
   Widget build(BuildContext context) {

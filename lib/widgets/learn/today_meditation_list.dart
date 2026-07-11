@@ -12,7 +12,7 @@ class TodayMeditationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (todayMeditations.isEmpty) return const SizedBox();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -30,7 +30,9 @@ class TodayMeditationList extends StatelessWidget {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => LearnDetailView(course: todayMeditations[index])),
+                    builder: (context) =>
+                        LearnDetailView(course: todayMeditations[index]),
+                  ),
                 ),
               );
             },

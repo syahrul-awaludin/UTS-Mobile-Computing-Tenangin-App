@@ -59,7 +59,7 @@ class _AuthInputFieldState extends State<AuthInputField> {
       child: Row(
         children: [
           Icon(
-            widget.icon, 
+            widget.icon,
             color: _isFocused ? AppColors.primary : AppColors.textCaption,
           ),
           const SizedBox(width: 12),
@@ -80,7 +80,9 @@ class _AuthInputFieldState extends State<AuthInputField> {
                 disabledBorder: InputBorder.none,
                 hintText: widget.hint,
                 hintStyle: const TextStyle(
-                    color: AppColors.textCaption, fontSize: 14),
+                  color: AppColors.textCaption,
+                  fontSize: 14,
+                ),
               ),
             ),
           ),

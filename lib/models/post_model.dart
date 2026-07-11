@@ -61,8 +61,12 @@ class PostModel {
     final id = json['id'] ?? '';
 
     // Parse createdAt and updatedAt
-    final createdAt = json['createdAt'] != null ? DateTime.parse(json['createdAt']).toLocal() : DateTime.now();
-    final updatedAt = json['updatedAt'] != null ? DateTime.parse(json['updatedAt']).toLocal() : createdAt;
+    final createdAt = json['createdAt'] != null
+        ? DateTime.parse(json['createdAt']).toLocal()
+        : DateTime.now();
+    final updatedAt = json['updatedAt'] != null
+        ? DateTime.parse(json['updatedAt']).toLocal()
+        : createdAt;
 
     final stats = json['stats'] ?? {};
 

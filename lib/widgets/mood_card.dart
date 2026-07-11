@@ -87,11 +87,7 @@ class MoodCard extends StatelessWidget {
         imagePath = 'assets/images/stress.png';
         break;
     }
-    return SizedBox(
-      width: 52,
-      height: 52,
-      child: Image.asset(imagePath),
-    );
+    return SizedBox(width: 52, height: 52, child: Image.asset(imagePath));
   }
 }
 

@@ -24,10 +24,7 @@ class PersonalityTestsSection extends StatelessWidget {
             itemCount: personalityTests.length,
             separatorBuilder: (_, _) => const SizedBox(width: 12),
             itemBuilder: (context, index) {
-              return CourseCard(
-                course: personalityTests[index],
-                onTap: () {},
-              );
+              return CourseCard(course: personalityTests[index], onTap: () {});
             },
           ),
         ),

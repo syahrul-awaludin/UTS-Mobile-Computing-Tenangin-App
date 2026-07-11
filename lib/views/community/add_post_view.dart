@@ -18,7 +18,10 @@ class AddPostView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: Text(isEditing ? 'Edit Post' : 'New Post', style: AppTypography.titleSemiBold()),
+        title: Text(
+          isEditing ? 'Edit Post' : 'New Post',
+          style: AppTypography.titleSemiBold(),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: AppColors.textHeading),
@@ -30,9 +33,7 @@ class AddPostView extends StatelessWidget {
             TextField(
               controller: communityController.postSubjectController,
               style: AppTypography.body1Regular(),
-              decoration: const InputDecoration(
-                hintText: 'Subject',
-              ),
+              decoration: const InputDecoration(hintText: 'Subject'),
             ),
             const SizedBox(height: 16),
             TextField(
@@ -45,30 +46,51 @@ class AddPostView extends StatelessWidget {
             ),
             const SizedBox(height: 32),
             communityController.isLoading
-              ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
-              : AppPrimaryButton(
-              label: isEditing ? 'Save Changes' : 'Share Post',
-              onPressed: () async {
-                if (isEditing) {
-                  final subject = communityController.postSubjectController.text.trim();
-                  final content = communityController.postContentController.text.trim();
-                  
-                  if (subject.isEmpty || content.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Please write a subject and content!')),
-                    );
-                    return;
-                  }
-                  
-                  final success = await context.read<CommunityController>().updatePost(postToEdit!.id, subject, content, context);
-                  if (success && context.mounted) {
-                    Navigator.pop(context);
-                  }
-                } else {
-                  await context.read<CommunityController>().createPost(context);
-                }
-              },
-            ),
+                ? const Center(
+                    child: CircularProgressIndicator(color: AppColors.primary),
+                  )
+                : AppPrimaryButton(
+                    label: isEditing ? 'Save Changes' : 'Share Post',
+                    onPressed: () async {
+                      if (isEditing) {
+                        final subject = communityController
+                            .postSubjectController
+                            .text
+                            .trim();
+                        final content = communityController
+                            .postContentController
+                            .text
+                            .trim();
+
+                        if (subject.isEmpty || content.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Please write a subject and content!',
+                              ),
+                            ),
+                          );
+                          return;
+                        }
+
+                        final success = await context
+                            .read<CommunityController>()
+                            .updatePost(
+                              postToEdit!.id,
+                              subject,
+                              content,
+                              context,
+                            );
+                        if (success && context.mounted) {
+                          Navigator.pop(context);
+                        }
+                      } else {
+                        await context.read<CommunityController>().createPost(
+                          context,
+                        );
+                      }
+                    },
+                  ),
           ],
         ),
       ),

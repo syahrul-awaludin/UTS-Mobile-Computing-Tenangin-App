@@ -7,10 +7,7 @@ import '../../theme/app_colors.dart';
 class NotificationBadge extends StatelessWidget {
   final Color iconColor;
 
-  const NotificationBadge({
-    super.key,
-    this.iconColor = AppColors.textHeading,
-  });
+  const NotificationBadge({super.key, this.iconColor = AppColors.textHeading});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +23,9 @@ class NotificationBadge extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const NotificationView()),
+                  MaterialPageRoute(
+                    builder: (context) => const NotificationView(),
+                  ),
                 );
               },
             ),

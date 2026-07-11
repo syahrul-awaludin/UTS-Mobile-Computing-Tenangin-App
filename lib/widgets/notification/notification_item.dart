@@ -27,12 +27,16 @@ class NotificationItem extends StatelessWidget {
     final bool isLike = notification.type == 'LIKE';
     final IconData icon = isLike ? Icons.favorite : Icons.chat_bubble;
     final Color iconColor = isLike ? Colors.red : AppColors.primary;
-    final String actionText = isLike ? 'liked your post' : 'commented on your post';
+    final String actionText = isLike
+        ? 'liked your post'
+        : 'commented on your post';
 
     return InkWell(
       onTap: onTap,
       child: Container(
-        color: notification.isRead ? Colors.transparent : AppColors.primary.withValues(alpha: 0.05),
+        color: notification.isRead
+            ? Colors.transparent
+            : AppColors.primary.withValues(alpha: 0.05),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,11 +63,7 @@ class NotificationItem extends StatelessWidget {
                       color: Colors.white,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
-                      icon,
-                      size: 12,
-                      color: iconColor,
-                    ),
+                    child: Icon(icon, size: 12, color: iconColor),
                   ),
                 ),
               ],

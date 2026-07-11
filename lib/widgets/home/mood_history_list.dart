@@ -12,18 +12,21 @@ class MoodHistoryList extends StatelessWidget {
     if (moodHistory.isEmpty) return const SizedBox();
 
     return Column(
-      children: moodHistory
-          .expand((mood) => [
-                MoodCard(
-                  date: mood.date,
-                  feeling: mood.feeling,
-                  moodColor: mood.moodColor,
-                  expression: mood.expression,
-                ),
-                const SizedBox(height: 12),
-              ])
-          .toList()
-        ..removeLast(),
+      children:
+          moodHistory
+              .expand(
+                (mood) => [
+                  MoodCard(
+                    date: mood.date,
+                    feeling: mood.feeling,
+                    moodColor: mood.moodColor,
+                    expression: mood.expression,
+                  ),
+                  const SizedBox(height: 12),
+                ],
+              )
+              .toList()
+            ..removeLast(),
     );
   }
 }

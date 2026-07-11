@@ -13,7 +13,9 @@ class AppTheme {
         elevation: 0,
         scrolledUnderElevation: 0,
         iconTheme: const IconThemeData(color: AppColors.textHeading),
-        titleTextStyle: AppTypography.headlineH1Bold(color: AppColors.textHeading).copyWith(fontSize: 24),
+        titleTextStyle: AppTypography.headlineH1Bold(
+          color: AppColors.textHeading,
+        ).copyWith(fontSize: 24),
       ),
       textTheme: TextTheme(
         // H1 — screen titles
@@ -26,7 +28,9 @@ class AppTheme {
         bodyLarge: AppTypography.body1Regular(),
         bodyMedium: AppTypography.body2Regular(),
         // Caption
-        labelSmall: AppTypography.smallDescriptionRegular(color: AppColors.textCaption),
+        labelSmall: AppTypography.smallDescriptionRegular(
+          color: AppColors.textCaption,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

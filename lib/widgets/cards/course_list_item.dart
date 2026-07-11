@@ -8,11 +8,7 @@ class CourseListItem extends StatelessWidget {
   final CourseModel course;
   final VoidCallback? onTap;
 
-  const CourseListItem({
-    super.key,
-    required this.course,
-    this.onTap,
-  });
+  const CourseListItem({super.key, required this.course, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -42,25 +38,36 @@ class CourseListItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    course.title,
-                    style: AppTypography.titleSemiBold(),
-                  ),
+                  Text(course.title, style: AppTypography.titleSemiBold()),
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(Icons.play_circle_outline,
-                          size: 14, color: AppColors.textCaption),
+                      const Icon(
+                        Icons.play_circle_outline,
+                        size: 14,
+                        color: AppColors.textCaption,
+                      ),
                       const SizedBox(width: 4),
-                      Text(course.duration,
-                          style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption)),
+                      Text(
+                        course.duration,
+                        style: AppTypography.smallDescriptionRegular(
+                          color: AppColors.textCaption,
+                        ),
+                      ),
                       if (course.mood.isNotEmpty) ...[
                         const SizedBox(width: 12),
-                        const Icon(Icons.favorite_border,
-                            size: 14, color: AppColors.textCaption),
+                        const Icon(
+                          Icons.favorite_border,
+                          size: 14,
+                          color: AppColors.textCaption,
+                        ),
                         const SizedBox(width: 4),
-                        Text(course.mood,
-                            style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption)),
+                        Text(
+                          course.mood,
+                          style: AppTypography.smallDescriptionRegular(
+                            color: AppColors.textCaption,
+                          ),
+                        ),
                       ],
                     ],
                   ),

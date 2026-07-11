@@ -22,10 +22,7 @@ class _LearnViewState extends State<LearnView> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: Text(
-          'Learn',
-          style: AppTypography.headlineH1Bold(),
-        ),
+        title: Text('Learn', style: AppTypography.headlineH1Bold()),
         centerTitle: false,
         backgroundColor: AppColors.background,
         elevation: 0,
@@ -45,7 +42,7 @@ class _LearnViewState extends State<LearnView> {
                     controller.updateSearch(val);
                   },
                 );
-              }
+              },
             ),
           ),
           Expanded(
@@ -54,7 +51,9 @@ class _LearnViewState extends State<LearnView> {
                 return ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   children: [
-                    TodayMeditationList(todayMeditations: controller.todayMeditations),
+                    TodayMeditationList(
+                      todayMeditations: controller.todayMeditations,
+                    ),
                     const SizedBox(height: 32),
                     SectionHeader(title: 'Mindset Course'),
                     const SizedBox(height: 16),
@@ -64,7 +63,9 @@ class _LearnViewState extends State<LearnView> {
                         child: Center(
                           child: Text(
                             'No courses found.',
-                            style: AppTypography.body1Regular(color: AppColors.textCaption),
+                            style: AppTypography.body1Regular(
+                              color: AppColors.textCaption,
+                            ),
                           ),
                         ),
                       )
@@ -78,7 +79,9 @@ class _LearnViewState extends State<LearnView> {
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LearnDetailView(course: course)),
+                                builder: (context) =>
+                                    LearnDetailView(course: course),
+                              ),
                             ),
                           ),
                         );
