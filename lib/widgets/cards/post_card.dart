@@ -86,12 +86,12 @@ class PostCard extends StatelessWidget {
           width: 42,
           height: 42,
           decoration: BoxDecoration(
-            color: post.avatarColor,
+            color: post.author.avatarColor,
             shape: BoxShape.circle,
           ),
           child: Icon(
-            post.avatarIcon,
-            color: post.avatarColor == const Color(0xFFB8E6D0)
+            post.author.avatarIcon,
+            color: post.author.avatarColor == const Color(0xFFB8E6D0)
                 ? const Color(0xFF4CAF50)
                 : AppColors.primary,
             size: 24,
@@ -103,7 +103,7 @@ class PostCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                post.userName,
+                post.author.name,
                 style: const TextStyle(
                   fontFamily: 'Inter',
                   fontSize: 14,
@@ -167,7 +167,7 @@ class PostCard extends StatelessWidget {
             }
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-            if (currentUserId != null && currentUserId == post.authorId) ...[
+            if (currentUserId != null && currentUserId == post.author.id) ...[
               const PopupMenuItem<String>(
                 value: 'edit',
                 child: Text('Edit Post', style: TextStyle(fontFamily: 'Inter', color: AppColors.textHeading, fontWeight: FontWeight.w500)),

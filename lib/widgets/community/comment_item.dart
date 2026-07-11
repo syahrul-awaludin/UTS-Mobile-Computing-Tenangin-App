@@ -41,8 +41,8 @@ class CommentItem extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 16,
-                backgroundColor: comment.avatarColor,
-                child: Icon(Icons.person, size: 16, color: comment.avatarColor.computeLuminance() > 0.5 ? Colors.black54 : Colors.white),
+                backgroundColor: comment.author.avatarColor,
+                child: Icon(Icons.person, size: 16, color: comment.author.avatarColor.computeLuminance() > 0.5 ? Colors.black54 : Colors.white),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -51,7 +51,7 @@ class CommentItem extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(comment.userName, style: AppTypography.body2SemiBold()),
+                        Text(comment.author.name, style: AppTypography.body2SemiBold()),
                         const SizedBox(width: 8),
                         Text(
                           comment.updatedAt.isAfter(comment.createdAt.add(const Duration(seconds: 1)))
@@ -86,8 +86,8 @@ class CommentItem extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 12,
-                        backgroundColor: reply.avatarColor,
-                        child: Icon(Icons.person, size: 12, color: reply.avatarColor.computeLuminance() > 0.5 ? Colors.black54 : Colors.white),
+                        backgroundColor: reply.author.avatarColor,
+                        child: Icon(Icons.person, size: 12, color: reply.author.avatarColor.computeLuminance() > 0.5 ? Colors.black54 : Colors.white),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
@@ -96,7 +96,7 @@ class CommentItem extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Text(reply.userName, style: AppTypography.body2SemiBold().copyWith(fontSize: 12)),
+                                Text(reply.author.name, style: AppTypography.body2SemiBold().copyWith(fontSize: 12)),
                                 const SizedBox(width: 8),
                                 Text(
                                   reply.updatedAt.isAfter(reply.createdAt.add(const Duration(seconds: 1)))
@@ -205,7 +205,7 @@ class CommentMenu extends StatelessWidget {
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-        if (currentUserId != null && currentUserId == comment.authorId) ...[
+        if (currentUserId != null && currentUserId == comment.author.id) ...[
           PopupMenuItem<String>(
             value: 'edit',
             child: Text('Edit Comment', style: AppTypography.body2Medium()),

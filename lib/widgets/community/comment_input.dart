@@ -41,7 +41,7 @@ class CommentInput extends StatelessWidget {
               child: Row(
                 children: [
                   Text('Replying to ', style: AppTypography.smallDescriptionRegular(color: AppColors.textCaption).copyWith(fontSize: 12)),
-                  Text(replyingTo!.userName, style: AppTypography.smallDescriptionSemiBold(color: AppColors.primary).copyWith(fontSize: 12)),
+                  Text(replyingTo!.author.name, style: AppTypography.smallDescriptionSemiBold(color: AppColors.primary).copyWith(fontSize: 12)),
                   const Spacer(),
                   GestureDetector(
                     onTap: onCancelReply,

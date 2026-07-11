@@ -1,42 +1,26 @@
-import 'package:flutter/material.dart';
+import 'user_model.dart';
 
 class CommentModel {
   final String id;
   final String postId;
-  final String authorId;
-  final String userName;
+  final UserModel author;
   final String text;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final Color avatarColor;
   final List<CommentModel> replies;
 
   const CommentModel({
     required this.id,
     required this.postId,
-    required this.authorId,
-    required this.userName,
+    required this.author,
     required this.text,
     required this.createdAt,
     required this.updatedAt,
-    required this.avatarColor,
     this.replies = const [],
   });
 
   factory CommentModel.fromJson(Map<String, dynamic> json) {
-    final author = json['author'] ?? {};
-    final userName = author['name'] ?? 'Anonymous';
-    final authorId = author['id'] ?? '';
-
-    // Generate a pseudo-random color based on user name length for consistency
-    final colors = [
-      const Color(0xFFB8E6D0),
-      const Color(0xFFF5D0E0),
-      const Color(0xFFD4C5F9),
-      const Color(0xFFFFE0B2),
-      const Color(0xFFE1F5FE),
-    ];
-    final Color avatarColor = colors[userName.length % colors.length];
+    final author = UserModel.fromJson(json['author'] ?? {});
 
     final createdAt = json['createdAt'] != null
         ? DateTime.parse(json['createdAt']).toLocal()
@@ -54,12 +38,10 @@ class CommentModel {
     return CommentModel(
       id: json['id'] ?? '',
       postId: json['postId'] ?? '',
-      authorId: authorId,
-      userName: userName,
+      author: author,
       text: json['text'] ?? '',
       createdAt: createdAt,
       updatedAt: updatedAt,
-      avatarColor: avatarColor,
       replies: replies,
     );
   }

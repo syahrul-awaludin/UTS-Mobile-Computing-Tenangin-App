@@ -1,16 +1,13 @@
-import 'package:flutter/material.dart';
+import 'user_model.dart';
 
 class PostModel {
   final String id;
-  final String authorId;
-  final String userName;
+  final UserModel author;
   final String subject;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String content;
   final String? imageAsset;
-  final Color avatarColor;
-  final IconData avatarIcon;
   final int likeCount;
   final int commentCount;
   final int bookmarkCount;
@@ -18,15 +15,12 @@ class PostModel {
 
   const PostModel({
     required this.id,
-    required this.authorId,
-    required this.userName,
+    required this.author,
     required this.subject,
     required this.createdAt,
     required this.updatedAt,
     required this.content,
     this.imageAsset,
-    required this.avatarColor,
-    required this.avatarIcon,
     this.likeCount = 0,
     this.commentCount = 0,
     this.bookmarkCount = 0,
@@ -35,15 +29,12 @@ class PostModel {
 
   PostModel copyWith({
     String? id,
-    String? authorId,
-    String? userName,
+    UserModel? author,
     String? subject,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? content,
     String? imageAsset,
-    Color? avatarColor,
-    IconData? avatarIcon,
     int? likeCount,
     int? commentCount,
     int? bookmarkCount,
@@ -51,15 +42,12 @@ class PostModel {
   }) {
     return PostModel(
       id: id ?? this.id,
-      authorId: authorId ?? this.authorId,
-      userName: userName ?? this.userName,
+      author: author ?? this.author,
       subject: subject ?? this.subject,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       content: content ?? this.content,
       imageAsset: imageAsset ?? this.imageAsset,
-      avatarColor: avatarColor ?? this.avatarColor,
-      avatarIcon: avatarIcon ?? this.avatarIcon,
       likeCount: likeCount ?? this.likeCount,
       commentCount: commentCount ?? this.commentCount,
       bookmarkCount: bookmarkCount ?? this.bookmarkCount,
@@ -69,20 +57,8 @@ class PostModel {
 
   factory PostModel.fromJson(Map<String, dynamic> json) {
     // Extract author details
-    final author = json['author'] ?? {};
-    final userName = author['name'] ?? 'Anonymous';
-    final authorId = author['id'] ?? '';
+    final author = UserModel.fromJson(json['author'] ?? {});
     final id = json['id'] ?? '';
-
-    // Generate a pseudo-random color based on user name length for consistency
-    final colors = [
-      const Color(0xFFB8E6D0),
-      const Color(0xFFF5D0E0),
-      const Color(0xFFD4C5F9),
-      const Color(0xFFFFE0B2),
-      const Color(0xFFE1F5FE),
-    ];
-    final Color avatarColor = colors[userName.length % colors.length];
 
     // Parse createdAt and updatedAt
     final createdAt = json['createdAt'] != null ? DateTime.parse(json['createdAt']).toLocal() : DateTime.now();
@@ -92,14 +68,11 @@ class PostModel {
 
     return PostModel(
       id: id,
-      authorId: authorId,
-      userName: userName,
+      author: author,
       subject: json['subject'] ?? 'Post',
       createdAt: createdAt,
       updatedAt: updatedAt,
       content: json['content'] ?? '',
-      avatarColor: avatarColor,
-      avatarIcon: Icons.person,
       likeCount: stats['likeCount'] ?? 0,
       commentCount: stats['commentCount'] ?? 0,
       bookmarkCount: stats['bookmarkCount'] ?? 0,
