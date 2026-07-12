@@ -50,6 +50,8 @@ class NotificationService {
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
+      presentBanner: true,
+      presentList: true,
     );
 
     const platformChannelSpecifics = NotificationDetails(
