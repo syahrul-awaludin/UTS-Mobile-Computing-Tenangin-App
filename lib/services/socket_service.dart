@@ -44,11 +44,18 @@ class SocketService with ChangeNotifier {
         String body = data['body'] ?? '';
 
         // Tampilkan notifikasi di status bar (sistem HP)
-        NotificationService.showNotification(
-          id: DateTime.now().millisecondsSinceEpoch.remainder(100000),
-          title: title,
-          body: body,
-        );
+        try {
+          NotificationService.showNotification(
+            id: DateTime.now().millisecondsSinceEpoch.remainder(100000),
+            title: title,
+            body: body,
+          ).catchError((e) {
+            debugPrint('Error showing local notification: $e');
+            showSimpleNotification(Text('Notif Error: $e'), background: Colors.red);
+          });
+        } catch (e) {
+          debugPrint('Exception in showNotification: $e');
+        }
 
         // Memunculkan In-App Notification Overlay di bagian atas (menggunakan overlay_support)
         showSimpleNotification(
