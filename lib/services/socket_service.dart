@@ -44,7 +44,7 @@ class SocketService with ChangeNotifier {
         String body = data['body'] ?? '';
 
         // Tampilkan notifikasi di status bar (sistem HP)
-        NotificationService().showNotification(
+        NotificationService.showNotification(
           id: DateTime.now().millisecondsSinceEpoch.remainder(100000),
           title: title,
           body: body,

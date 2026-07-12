@@ -4,15 +4,14 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import '../models/notification_model.dart';
 
 class NotificationService {
-  static final FlutterLocalNotificationsPlugin _notificationsPlugin =
+  static final FlutterLocalNotificationsPlugin plugin =
       FlutterLocalNotificationsPlugin();
 
-  static Future<void> initLocalNotifications() async {
+  static Future<void> initialize() async {
     const initializationSettingsAndroid = AndroidInitializationSettings(
       '@mipmap/ic_launcher',
     );
 
-    // Konfigurasi untuk iOS dan macOS
     const initializationSettingsDarwin = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
@@ -25,25 +24,25 @@ class NotificationService {
       macOS: initializationSettingsDarwin,
     );
 
-    await _notificationsPlugin.initialize(settings: initializationSettings);
+    await plugin.initialize(settings: initializationSettings);
+  }
 
-    // Request notification permission for Android 13+
-    final androidImplementation = _notificationsPlugin.resolvePlatformSpecificImplementation<
+  static Future<void> requestPermission() async {
+    final androidImplementation = plugin.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>();
     await androidImplementation?.requestNotificationsPermission();
   }
 
-  Future<void> showNotification({
+  static Future<void> showNotification({
     required int id,
     required String title,
     required String body,
   }) async {
     const androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'tenangin_channel',
-      'Tenangin Notifications',
+      'basic_channel',
+      'Basic Notification',
       importance: Importance.max,
       priority: Priority.high,
-      showWhen: false,
     );
 
     const darwinPlatformChannelSpecifics = DarwinNotificationDetails(
@@ -60,11 +59,11 @@ class NotificationService {
       macOS: darwinPlatformChannelSpecifics,
     );
 
-    await _notificationsPlugin.show(
-      id: id,
-      title: title,
-      body: body,
-      notificationDetails: platformChannelSpecifics,
+    await plugin.show(
+      id,
+      title,
+      body,
+      platformChannelSpecifics,
     );
   }
 

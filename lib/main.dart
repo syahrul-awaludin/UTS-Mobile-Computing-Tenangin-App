@@ -23,7 +23,8 @@ import 'services/socket_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await NotificationService.initLocalNotifications();
+  await NotificationService.initialize();
+  await NotificationService.requestPermission();
   runApp(const TenanginApp());
 }
 
