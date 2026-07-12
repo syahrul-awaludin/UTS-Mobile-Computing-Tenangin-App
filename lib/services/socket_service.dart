@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:overlay_support/overlay_support.dart';
 import '../theme/app_colors.dart';
+import 'notification_service.dart';
 
 class SocketService with ChangeNotifier {
   io.Socket? _socket;
@@ -41,6 +42,13 @@ class SocketService with ChangeNotifier {
       if (data != null) {
         String title = data['title'] ?? 'Notifikasi Baru';
         String body = data['body'] ?? '';
+
+        // Tampilkan notifikasi di status bar (sistem HP)
+        NotificationService().showNotification(
+          id: DateTime.now().millisecondsSinceEpoch.remainder(100000),
+          title: title,
+          body: body,
+        );
 
         // Memunculkan In-App Notification Overlay di bagian atas (menggunakan overlay_support)
         showSimpleNotification(

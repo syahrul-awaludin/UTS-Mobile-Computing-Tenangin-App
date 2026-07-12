@@ -46,7 +46,11 @@ class NotificationService {
       showWhen: false,
     );
 
-    const darwinPlatformChannelSpecifics = DarwinNotificationDetails();
+    const darwinPlatformChannelSpecifics = DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
 
     const platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
